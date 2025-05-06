@@ -2,6 +2,9 @@
   "name": "project-manager",
   "version": "0.1.0",
   "private": true,
+  "prisma": {
+    "output": "./app/generated"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
