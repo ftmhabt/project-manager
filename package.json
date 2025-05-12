@@ -2,8 +2,10 @@
   "name": "project-manager",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "prisma": {
-    "output": "./app/generated"
+    "output": "./app/generated",
+    "seed": "tsx prisma/seed.ts"
   },
   "scripts": {
     "dev": "next dev --turbopack",
@@ -28,7 +30,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^20.17.46",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
@@ -37,6 +39,7 @@
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.19.4",
     "typescript": "^5"
   }
 }
