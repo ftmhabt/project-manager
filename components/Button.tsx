@@ -1,5 +1,5 @@
 import { cva, VariantProps } from "class-variance-authority";
-import { FC, HTMLAttributes } from "react";
+import { ButtonHTMLAttributes, FC } from "react";
 
 const buttonClass = cva(
   [
@@ -45,7 +45,7 @@ const buttonClass = cva(
 );
 
 export interface ButtonProps
-  extends HTMLAttributes<HTMLButtonElement>,
+  extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonClass> {}
 
 const Button: FC<ButtonProps> = ({
