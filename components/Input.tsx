@@ -7,7 +7,7 @@ const Input: FC<InputHTMLAttributes<HTMLInputElement>> = ({
   return (
     <input
       className={clsx(
-        "boeder-solid border-gray border-2 px-6 py-2 text-lg rounded-3xl w-full",
+        "boeder-solid border-black/40 border-2 px-6 py-2 text-lg rounded-3xl w-full text-black",
         className
       )}
       {...props}

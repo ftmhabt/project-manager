@@ -54,7 +54,7 @@ const AuthForm = ({ mode }: AuthFormProps) => {
     <Card>
       <div className="w-full">
         <div className="text-center">
-          <h2 className="text-3xl mb-2">{content.header}</h2>
+          <h2 className="text-3xl mb-2 text-black">{content.header}</h2>
           <p className="text-lg text-black/25">{content.subHeader}</p>
         </div>
       </div>
@@ -116,7 +116,11 @@ const AuthForm = ({ mode }: AuthFormProps) => {
         <div className="flex items-center justify-between">
           <div>
             <span>
-              <Link href={content.linkUrl} className="text-blue-600 font-bold">
+              <Link
+                prefetch
+                href={content.linkUrl}
+                className="text-blue-600 font-bold"
+              >
                 {content.linkText}
               </Link>
             </span>
