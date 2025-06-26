@@ -78,7 +78,7 @@ const AuthForm = ({ mode }: AuthFormProps) => {
               <Input
                 required
                 placeholder="Last Name"
-                value={formState.firstName}
+                value={formState.lastName}
                 className="border-solid border-gray border-2 px-6 py-2 text-lg rounded-3xl w-full"
                 onChange={(e) =>
                   setFormState((s) => ({ ...s, lastName: e.target.value }))

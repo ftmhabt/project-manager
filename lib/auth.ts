@@ -9,7 +9,7 @@ export const comparePasswords = (
   hashedPassword: string
 ) => bcrypt.compare(plainTextPassword, hashedPassword);
 
-export const createJWT = (user) => {
+export const createJWT = (user: User) => {
   const iat = Math.floor(Date.now() / 1000);
   const exp = iat + 60 * 60 * 24 * 7;
 
@@ -23,7 +23,7 @@ export const createJWT = (user) => {
     .sign(new TextEncoder().encode(process.env.JWT_SECRET));
 };
 
-export const validateJWT = async (jwt) => {
+export const validateJWT = async (jwt: string) => {
   const { payload } = await jwtVerify(
     jwt,
     new TextEncoder().encode(process.env.JWT_SECRET)
@@ -43,4 +43,12 @@ export const getUserFromCookie = async (cookies) => {
   });
 
   return user;
+};
+
+type User = {
+  id: string;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
 };

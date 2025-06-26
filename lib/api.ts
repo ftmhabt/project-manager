@@ -23,15 +23,16 @@ export const fetcher = async ({
   if (!res.ok) throw new Error("API error");
 
   if (json) {
+    console.log(res);
     const data = await res.json();
     return data.data;
   }
 };
 
-export const register = (user: Record<string, any>) => {
+export const register = (user) => {
   return fetcher({ url: "/api/register", method: "POST", body: user });
 };
 
-export const signin = (user: Record<string, any>) => {
+export const signin = (user) => {
   return fetcher({ url: "/api/signin", method: "POST", body: user });
 };
