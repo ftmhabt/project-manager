@@ -1,1 +1,27 @@
 @import "tailwindcss";
+
+.candy-mesh {
+  background-color: #ff99ee;
+  background-image: radial-gradient(
+      at 99% 6%,
+      hsla(195, 69%, 67%, 1) 0px,
+      transparent 50%
+    ),
+    radial-gradient(at 55% 88%, hsla(189, 74%, 69%, 1) 0px, transparent 50%),
+    radial-gradient(at 53% 27%, hsla(271, 78%, 63%, 1) 0px, transparent 50%),
+    radial-gradient(at 89% 8%, hsla(317, 89%, 70%, 1) 0px, transparent 50%),
+    radial-gradient(at 35% 44%, hsla(337, 92%, 61%, 1) 0px, transparent 50%);
+}
+
+.pastel-mesh {
+  background-color: #ff99ee;
+  background-image: radial-gradient(
+      at 99% 6%,
+      hsla(310, 100%, 85%, 1) 0px,
+      transparent 50%
+    ),
+    radial-gradient(at 55% 88%, hsla(275, 100%, 80%, 1) 0px, transparent 50%),
+    radial-gradient(at 53% 27%, hsla(290, 90%, 78%, 1) 0px, transparent 50%),
+    radial-gradient(at 89% 8%, hsla(330, 100%, 85%, 1) 0px, transparent 50%),
+    radial-gradient(at 35% 44%, hsla(240, 100%, 85%, 1) 0px, transparent 50%);
+}

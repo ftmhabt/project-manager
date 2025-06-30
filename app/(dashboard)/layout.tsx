@@ -9,7 +9,7 @@ export default function DashboardRootLayout({
   return (
     <html>
       <head />
-      <body className="h-screen w-screen bg-[linear-gradient(90deg,#ff0000,#ff9900,#ffff00,#33cc33,#3399ff,#6600cc,#ff3399)] text-white p-6">
+      <body className="h-screen w-screen candy-mesh text-white p-6">
         <GlassPane className="w-full h-full flex justify-center items-center">
           {children}
         </GlassPane>
