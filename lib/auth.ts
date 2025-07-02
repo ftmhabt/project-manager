@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import { jwtVerify, SignJWT } from "jose";
 import { db } from "./db";
+import { cookies } from "next/headers";
 
 export const hashPassword = (password: string) => bcrypt.hash(password, 10);
 
@@ -31,18 +32,20 @@ export const validateJWT = async (jwt: string) => {
   return payload.payload as any;
 };
 
-export const getUserFromCookie = async (cookies) => {
-  const jwt = cookies.get(process.env.COOKIE_NAME);
+export const getUserFromCookie = async () => {
+  const allCookies = await cookies();
+  const jwt = allCookies.get(process.env.COOKIE_NAME || "");
+  if (jwt) {
+    const { id } = await validateJWT(jwt.value);
 
-  const { id } = await validateJWT(jwt);
+    const user = await db.user.findUnique({
+      where: {
+        id,
+      },
+    });
 
-  const user = await db.user.findUnique({
-    where: {
-      id,
-    },
-  });
-
-  return user;
+    return user;
+  }
 };
 
 type User = {
