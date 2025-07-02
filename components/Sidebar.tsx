@@ -10,7 +10,7 @@ const links: LinkItem[] = [
 
 const Sidebar = () => {
   return (
-    <Card>
+    <Card className="flex flex-col h-full justify-between">
       {links.map((link) => (
         <SidebarLink key={link.id} link={link} />
       ))}

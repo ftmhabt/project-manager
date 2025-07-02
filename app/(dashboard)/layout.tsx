@@ -1,6 +1,7 @@
 import GlassPane from "@/components/GlassPane";
 import { ReactNode } from "react";
 import "@/styles/globals.css";
+import Sidebar from "@/components/Sidebar";
 export default function DashboardRootLayout({
   children,
 }: {
@@ -11,6 +12,7 @@ export default function DashboardRootLayout({
       <head />
       <body className="h-screen w-screen candy-mesh text-white p-6">
         <GlassPane className="w-full h-full flex justify-center items-center">
+          <Sidebar />
           {children}
         </GlassPane>
       </body>
