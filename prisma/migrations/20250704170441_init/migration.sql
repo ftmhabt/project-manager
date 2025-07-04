@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "TASK_STATUS" AS ENUM ('NOT_STARTED', 'STARTED', 'COMPELETED');
+CREATE TYPE "TASK_STATUS" AS ENUM ('NOT_STARTED', 'STARTED', 'COMPLETED');
 
 -- CreateTable
 CREATE TABLE "User" (
@@ -37,11 +37,15 @@ CREATE TABLE "Task" (
     "status" "TASK_STATUS" NOT NULL,
     "ownerId" TEXT NOT NULL,
     "projectId" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
     "due" TIMESTAMP(3),
     "deleted" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "Task_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
 CREATE INDEX "Project_ownerId_id_idx" ON "Project"("ownerId", "id");
