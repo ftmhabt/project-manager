@@ -11,7 +11,7 @@ const GlassPane = ({
   return (
     <div
       className={clsx(
-        "rounded-2xl border-solid border-1 border-gray-200 backdrop-blur-lg",
+        "rounded-4xl border-solid border-1 border-gray-200 backdrop-blur-lg",
         className
       )}
     >
