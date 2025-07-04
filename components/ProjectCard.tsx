@@ -1,13 +1,18 @@
 import { FC } from "react";
-import { Prisma } from "@prisma/client";
+// import { Prisma } from "@prisma/client";
 import Card from "./Card";
 import clsx from "clsx";
+import { Project, Task } from "@/app/generated/prisma";
 
-const projectWithTasks = Prisma.validator<Prisma.ProjectArgs>()({
-  include: { tasks: true },
-});
+// const projectWithTasks = Prisma.validator<Prisma.ProjectArgs>()({
+//   include: { tasks: true },
+// });
 
-type ProjectWithTasks = Prisma.ProjectGetPayload<typeof projectWithTasks>;
+// type ProjectWithTasks = Prisma.ProjectGetPayload<typeof projectWithTasks>;
+
+type ProjectWithTasks = Project & {
+  tasks: Task[];
+};
 
 const formatDate = (date) =>
   new Date(date).toLocaleDateString("en-us", {

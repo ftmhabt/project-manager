@@ -49,7 +49,7 @@ model Project {
 enum TASK_STATUS {
   NOT_STARTED
   STARTED
-  COMPELETED
+  COMPLETED
 }
 
 model Task {
