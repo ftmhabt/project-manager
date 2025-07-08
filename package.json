@@ -10,8 +10,6 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "preinstall": "npx prisma migrate deploy",
-    "postinstall": "prisma generate",
     "start": "next start",
     "lint": "next lint"
   },
