@@ -3,9 +3,9 @@ import SidebarLink, { LinkItem } from "./SidebarLink";
 
 const links: LinkItem[] = [
   { id: 1, label: "Home", icon: "Grid", link: "/home" },
-  { id: 2, label: "Calendar", icon: "Calendar", link: "/calendar" },
-  { id: 3, label: "Profile", icon: "User", link: "/profile" },
-  { id: 4, label: "Setting", icon: "Settings", link: "/setting" },
+  { id: 2, label: "Calendar", icon: "Calendar", link: "#" },
+  { id: 3, label: "Profile", icon: "User", link: "#" },
+  { id: 4, label: "Setting", icon: "Settings", link: "#" },
 ];
 
 const Sidebar = () => {
