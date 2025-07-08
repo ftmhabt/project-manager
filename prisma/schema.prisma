@@ -37,17 +37,24 @@ model Project {
 }
 
 model Task {
-  id          String    @id @default(uuid())
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id          String      @id @default(uuid())
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
   name        String
   ownerId     String
   projectId   String
   due         DateTime?
-  deleted     Boolean   @default(false)
+  deleted     Boolean     @default(false)
   description String
-  owner       User      @relation(fields: [ownerId], references: [id])
-  project     Project   @relation(fields: [projectId], references: [id])
+  owner       User        @relation(fields: [ownerId], references: [id])
+  project     Project     @relation(fields: [projectId], references: [id])
+  status      TASK_STATUS
 
   @@index([ownerId])
+}
+
+enum TASK_STATUS {
+  NOT_STARTED
+  STARTED
+  COMPLETED
 }
