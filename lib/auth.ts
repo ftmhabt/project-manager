@@ -3,6 +3,14 @@ import { jwtVerify, SignJWT } from "jose";
 import { db } from "./db";
 import { cookies } from "next/headers";
 
+type JWTPayload = {
+  id: string;
+  email: string;
+  iat?: number;
+  exp?: number;
+  nbf?: number;
+};
+
 export const hashPassword = (password: string) => bcrypt.hash(password, 10);
 
 export const comparePasswords = (
@@ -29,7 +37,7 @@ export const validateJWT = async (jwt: string) => {
     jwt,
     new TextEncoder().encode(process.env.JWT_SECRET)
   );
-  return payload.payload as any;
+  return payload.payload as JWTPayload;
 };
 
 export const getUserFromCookie = async () => {
