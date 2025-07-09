@@ -1,3 +1,5 @@
+"use client";
+
 import clsx from "clsx";
 import { FC, InputHTMLAttributes } from "react";
 const Input: FC<InputHTMLAttributes<HTMLInputElement>> = ({
