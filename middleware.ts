@@ -13,6 +13,7 @@ export const validateJWT = async (jwt: string) => {
 
 export default async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
@@ -29,6 +30,12 @@ export default async function middleware(req: NextRequest) {
   if (!jwt) {
     req.nextUrl.pathname = "/signin";
     return NextResponse.redirect(req.nextUrl);
+  }
+
+  if (pathname === "/") {
+    const url = req.nextUrl.clone();
+    url.pathname = "/home";
+    return NextResponse.redirect(url);
   }
 
   try {
