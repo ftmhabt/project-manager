@@ -1,8 +1,8 @@
 import { getUserFromCookie } from "@/lib/auth";
 import { db } from "@/lib/db";
-import Button from "./Button";
 import Card from "./Card";
 import { Task, TASK_STATUS } from "@/app/generated/prisma";
+import Newtask from "./NewTask";
 
 const getData = async () => {
   const user = await getUserFromCookie();
@@ -26,9 +26,11 @@ const getData = async () => {
 const TaskCard = async ({
   title,
   tasks,
+  projectId,
 }: {
   title?: string;
   tasks?: Task[];
+  projectId?: string;
 }) => {
   const data = tasks || (await getData());
   return (
@@ -38,9 +40,7 @@ const TaskCard = async ({
           <span className="text-3xl text-gray-600"> {title || ""}</span>
         </div>
         <div>
-          <Button intent="text" className="text-violet-600">
-            + Create New
-          </Button>
+          <Newtask projectId={projectId} />
         </div>
       </div>
       <div>
