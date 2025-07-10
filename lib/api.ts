@@ -58,3 +58,17 @@ export const createNewTask = ({ name, description, projectId }) =>
       body: { name, description, projectId },
     });
   };
+
+export const changeTaskStatus = ({ id, status, projectId }) =>
+  // : {
+  //   name: string;
+  //   description: string;
+  //   projectId: string;
+  // }
+  {
+    return fetcher({
+      url: "/api/status",
+      method: "PUT",
+      body: { id, status, projectId },
+    });
+  };

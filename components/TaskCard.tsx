@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import Card from "./Card";
 import { Task, TASK_STATUS } from "@/app/generated/prisma";
 import Newtask from "./NewTask";
+import IsStarted from "./IsStarted";
 
 const getData = async () => {
   const user = await getUserFromCookie();
@@ -33,37 +34,60 @@ const TaskCard = async ({
   projectId?: string;
 }) => {
   const data = tasks || (await getData());
+
+  const notStartedTasks = data.filter(
+    (task) => task.status === TASK_STATUS.NOT_STARTED
+  );
+  const startedTasks = data.filter(
+    (task) => task.status === TASK_STATUS.STARTED
+  );
+  const completedTasks = data.filter(
+    (task) => task.status === TASK_STATUS.COMPLETED
+  );
+
+  const renderTaskGroup = (tasks: Task[], heading: string, color: string) => (
+    <div className="mt-6">
+      <h3 className={`text-xl font-semibold ${color} mb-2`}>{heading}</h3>
+      {tasks.length ? (
+        tasks.map((task) => (
+          <div
+            className={`py-2 ${
+              task.status === TASK_STATUS.COMPLETED &&
+              "line-through decoration-black"
+            }`}
+            key={task.id}
+          >
+            {task.status !== TASK_STATUS.COMPLETED && (
+              <IsStarted task={task} projectId={projectId || ""} />
+            )}
+            <div>
+              <span className="text-2xl text-gray-700 ">{task.name}</span>
+            </div>
+            <div>
+              <span className="text-sm text-gray-500">{task.description}</span>
+            </div>
+          </div>
+        ))
+      ) : (
+        <div className="text-gray-400 italic">No tasks</div>
+      )}
+    </div>
+  );
+
   return (
     <Card>
       <div className="flex justify-between items-center">
         <div>
-          <span className="text-3xl text-gray-600"> {title || ""}</span>
+          <span className="text-3xl text-gray-600">{title || ""}</span>
         </div>
         <div>
           <Newtask projectId={projectId} />
         </div>
       </div>
-      <div>
-        {data && data.length ? (
-          <div>
-            {data.map((task) => (
-              <div className="py-2" key={task.id}>
-                <div>
-                  <span className="text-3xl text-gray-600"> {task.name}</span>
-                </div>
-                <div>
-                  <span className="text-sm text-gray-400">
-                    {" "}
-                    {task.description}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div>no tasks</div>
-        )}
-      </div>
+
+      {renderTaskGroup(notStartedTasks, "Not Started Tasks", "text-red-600")}
+      {renderTaskGroup(startedTasks, "Started Tasks", "text-yellow-600")}
+      {renderTaskGroup(completedTasks, "Completed Tasks", "text-green-600")}
     </Card>
   );
 };
