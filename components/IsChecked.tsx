@@ -5,27 +5,29 @@ import { Task, TASK_STATUS } from "@/app/generated/prisma";
 import { updateTaskStatus } from "@/app/actions/changeTaskStatus";
 import StatusToggle from "./StatusToggle";
 
-interface IsStartedProps {
+interface IsCheckedProps {
   projectId: string;
   task: Task;
 }
 
-export default function IsStarted({ task, projectId }: IsStartedProps) {
-  const [isStarted, setIsStarted] = useState(
-    task.status === TASK_STATUS.STARTED
+export default function IsChecked({ task, projectId }: IsCheckedProps) {
+  const [isChecked, setIsChecked] = useState(
+    task.status === TASK_STATUS.COMPLETED
   );
   const [isPending, startTransition] = useTransition();
 
   const handleToggle = () => {
-    const newStatus = isStarted ? TASK_STATUS.NOT_STARTED : TASK_STATUS.STARTED;
+    const newStatus = isChecked
+      ? TASK_STATUS.NOT_STARTED
+      : TASK_STATUS.COMPLETED;
 
-    setIsStarted(newStatus === TASK_STATUS.STARTED);
+    setIsChecked(newStatus === TASK_STATUS.COMPLETED);
 
     startTransition(async () => {
       try {
         await updateTaskStatus({ id: task.id, projectId, status: newStatus });
       } catch (err) {
-        setIsStarted(isStarted);
+        setIsChecked(isChecked);
         console.error("Server action failed:", err);
       }
     });
@@ -35,11 +37,11 @@ export default function IsStarted({ task, projectId }: IsStartedProps) {
     <StatusToggle
       id={task.id}
       label="Task Started"
-      checked={isStarted}
+      checked={isChecked}
       loading={isPending}
       onChange={handleToggle}
-      trueLabel="Started"
-      falseLabel="Not Started"
+      trueLabel="Checked"
+      falseLabel="Unchecked"
     />
   );
 }

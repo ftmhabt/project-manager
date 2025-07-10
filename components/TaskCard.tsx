@@ -4,6 +4,7 @@ import Card from "./Card";
 import { Task, TASK_STATUS } from "@/app/generated/prisma";
 import Newtask from "./NewTask";
 import IsStarted from "./IsStarted";
+import IsChecked from "./IsChecked";
 
 const getData = async () => {
   const user = await getUserFromCookie();
@@ -50,21 +51,24 @@ const TaskCard = async ({
       <h3 className={`text-xl font-semibold ${color} mb-2`}>{heading}</h3>
       {tasks.length ? (
         tasks.map((task) => (
-          <div
-            className={`py-2 ${
-              task.status === TASK_STATUS.COMPLETED &&
-              "line-through decoration-black"
-            }`}
-            key={task.id}
-          >
-            {task.status !== TASK_STATUS.COMPLETED && (
-              <IsStarted task={task} projectId={projectId || ""} />
-            )}
-            <div>
-              <span className="text-2xl text-gray-700 ">{task.name}</span>
+          <div key={task.id} className="flex justify-between">
+            <div className="py-2">
+              <div>
+                <span className="text-2xl text-gray-700 ">{task.name}</span>
+              </div>
+              <div>
+                <span className="text-sm text-gray-500">
+                  {task.description}
+                </span>
+              </div>
             </div>
-            <div>
-              <span className="text-sm text-gray-500">{task.description}</span>
+            <div className="flex justify-around">
+              {task.status !== TASK_STATUS.COMPLETED && (
+                <IsStarted task={task} projectId={projectId || ""} />
+              )}
+              {task.status !== TASK_STATUS.NOT_STARTED && (
+                <IsChecked task={task} projectId={projectId || ""} />
+              )}
             </div>
           </div>
         ))
@@ -85,9 +89,9 @@ const TaskCard = async ({
         </div>
       </div>
 
-      {renderTaskGroup(notStartedTasks, "Not Started Tasks", "text-red-600")}
-      {renderTaskGroup(startedTasks, "Started Tasks", "text-yellow-600")}
-      {renderTaskGroup(completedTasks, "Completed Tasks", "text-green-600")}
+      {renderTaskGroup(notStartedTasks, "To Start", "text-red-600")}
+      {renderTaskGroup(startedTasks, "In Progress", "text-yellow-600")}
+      {renderTaskGroup(completedTasks, "Done", "text-green-600")}
     </Card>
   );
 };
