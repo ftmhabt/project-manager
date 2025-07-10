@@ -5,6 +5,7 @@ import { Task, TASK_STATUS } from "@/app/generated/prisma";
 import Newtask from "./NewTask";
 import IsStarted from "./IsStarted";
 import IsChecked from "./IsChecked";
+import DeleteButton from "./DeleteButton";
 
 const getData = async () => {
   const user = await getUserFromCookie();
@@ -69,6 +70,7 @@ const TaskCard = async ({
               {task.status !== TASK_STATUS.NOT_STARTED && (
                 <IsChecked task={task} projectId={projectId || ""} />
               )}
+              <DeleteButton task={task} projectId={projectId || ""} />
             </div>
           </div>
         ))

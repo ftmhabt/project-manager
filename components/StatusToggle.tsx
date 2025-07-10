@@ -10,7 +10,6 @@ interface StatusToggleProps {
 
 export default function StatusToggle({
   id,
-  label,
   checked,
   loading = false,
   onChange,
@@ -19,8 +18,6 @@ export default function StatusToggle({
 }: StatusToggleProps) {
   return (
     <div className="flex items-center gap-3">
-      {label && <span className="text-sm">{label}</span>}
-
       {loading ? (
         <div className="h-4 w-4 animate-spin rounded-full border-2 border-gray-400 border-t-transparent" />
       ) : (
