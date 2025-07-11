@@ -6,6 +6,7 @@ import Newtask from "./NewTask";
 import IsStarted from "./IsStarted";
 import IsChecked from "./IsChecked";
 import DeleteButton from "./DeleteButton";
+import EditTask from "./EditTask";
 
 const getData = async () => {
   const user = await getUserFromCookie();
@@ -67,9 +68,15 @@ const TaskCard = async ({
               {task.status !== TASK_STATUS.COMPLETED && (
                 <IsStarted task={task} projectId={projectId || ""} />
               )}
-              {task.status !== TASK_STATUS.NOT_STARTED && (
-                <IsChecked task={task} projectId={projectId || ""} />
-              )}
+
+              <IsChecked task={task} projectId={projectId || ""} />
+
+              <EditTask
+                id={task.id}
+                projectId={projectId || ""}
+                name={task.name}
+                description={task.description}
+              />
               <DeleteButton task={task} projectId={projectId || ""} />
             </div>
           </div>
