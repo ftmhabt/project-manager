@@ -37,11 +37,10 @@ export default function IsChecked({ task, projectId }: IsCheckedProps) {
     <StatusToggle
       id={task.id}
       label="Task Started"
+      textColor="text-indigo-500"
       checked={isChecked}
       loading={isPending}
       onChange={handleToggle}
-      trueLabel="Checked"
-      falseLabel="Unchecked"
     />
   );
 }

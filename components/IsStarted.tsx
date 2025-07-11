@@ -36,10 +36,11 @@ export default function IsStarted({ task, projectId }: IsStartedProps) {
       id={task.id}
       label="Task Started"
       checked={isStarted}
+      textColor="text-violet-500"
       loading={isPending}
       onChange={handleToggle}
       trueLabel="Started"
-      falseLabel="Not Started"
+      falseLabel="Start"
     />
   );
 }
