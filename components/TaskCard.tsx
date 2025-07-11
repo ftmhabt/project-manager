@@ -53,7 +53,10 @@ const TaskCard = async ({
       <h3 className={`text-xl font-semibold ${color} mb-2`}>{heading}</h3>
       {tasks.length ? (
         tasks.map((task) => (
-          <div key={task.id} className="flex justify-between">
+          <div
+            key={task.id}
+            className="flex justify-between md:flex-row flex-col"
+          >
             <div className="py-2">
               <div>
                 <span className="text-2xl text-gray-700 ">{task.name}</span>
@@ -64,7 +67,7 @@ const TaskCard = async ({
                 </span>
               </div>
             </div>
-            <div className="flex justify-around">
+            <div className="flex md:gap-3 justify-end flex-wrap md:flex-nowrap">
               {task.status !== TASK_STATUS.COMPLETED && (
                 <IsStarted task={task} projectId={projectId || ""} />
               )}

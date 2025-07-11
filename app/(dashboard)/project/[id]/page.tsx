@@ -22,7 +22,7 @@ export default async function ProjectPage({
   const project = await getData(id);
 
   return (
-    <div className="h-full overflow-y-auto pr-6 w-1/1">
+    <div className="h-full overflow-y-auto pr-3 md:pr-6 w-1/1">
       <TaskCard
         tasks={project?.tasks || []}
         title={project?.name || "Project"}
