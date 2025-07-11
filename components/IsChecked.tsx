@@ -3,7 +3,7 @@
 import React, { useState, useTransition } from "react";
 import { Task, TASK_STATUS } from "@/app/generated/prisma";
 import { updateTaskStatus } from "@/app/actions/changeTaskStatus";
-import StatusToggle from "./StatusToggle";
+import ActionButton from "./ActionButton";
 
 interface IsCheckedProps {
   projectId: string;
@@ -34,13 +34,13 @@ export default function IsChecked({ task, projectId }: IsCheckedProps) {
   };
 
   return (
-    <StatusToggle
+    <ActionButton
       id={task.id}
-      label="Task Started"
+      label={isChecked ? "Checked" : "Check"}
       textColor="text-indigo-500"
-      checked={isChecked}
+      loaderColor="border-indigo-500"
       loading={isPending}
-      onChange={handleToggle}
+      onClick={handleToggle}
     />
   );
 }

@@ -3,7 +3,7 @@
 import React, { useState, useTransition } from "react";
 import { Task, TASK_STATUS } from "@/app/generated/prisma";
 import { updateTaskStatus } from "@/app/actions/changeTaskStatus";
-import StatusToggle from "./StatusToggle";
+import ActionButton from "./ActionButton";
 
 interface IsStartedProps {
   projectId: string;
@@ -32,15 +32,13 @@ export default function IsStarted({ task, projectId }: IsStartedProps) {
   };
 
   return (
-    <StatusToggle
+    <ActionButton
       id={task.id}
-      label="Task Started"
-      checked={isStarted}
+      label={isStarted ? "Started" : "Start"}
       textColor="text-violet-500"
+      loaderColor="border-violet-500"
       loading={isPending}
-      onChange={handleToggle}
-      trueLabel="Started"
-      falseLabel="Start"
+      onClick={handleToggle}
     />
   );
 }

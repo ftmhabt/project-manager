@@ -28,6 +28,7 @@ export default function DeleteButton({ task, projectId }: DeleteButtonProps) {
       id={task.id}
       label="Delete"
       textColor="text-pink-500"
+      loaderColor="border-pink-500"
       loading={isPending}
       onClick={handleClick}
     />
