@@ -33,9 +33,9 @@ export default async function Page() {
             <Greeting />
           </Suspense>
         </div>
-        <div className="flex flex-2 grow items-center flex-wrap mt-3 -m-3">
+        <div className="flex flex-2 grow items-center flex-wrap flex-col sm:flex-row mt-3 -m-3">
           {projects.map((project) => (
-            <div className="w-1/3 p-3" key={project.id}>
+            <div className="sm:w-1/3 w-full p-3" key={project.id}>
               <Link href={`/project/${project.id}`}>
                 <ProjectCard project={project} />
               </Link>
