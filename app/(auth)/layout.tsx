@@ -6,7 +6,7 @@ export default function AuthRootLayout({ children }: { children: ReactNode }) {
     <html>
       <head />
       <body className="h-screen w-screen pastel-mesh text-white p-6">
-        <GlassPane className="w-full h-full flex justify-center items-center">
+        <GlassPane className="rounded-4xl w-full h-full flex justify-center items-center">
           {children}
         </GlassPane>
       </body>

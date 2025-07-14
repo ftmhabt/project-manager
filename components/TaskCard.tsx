@@ -7,6 +7,7 @@ import IsStarted from "./IsStarted";
 import IsChecked from "./IsChecked";
 import DeleteButton from "./DeleteButton";
 import EditTask from "./EditTask";
+import GlassPane from "./GlassPane";
 
 const getData = async () => {
   const user = await getUserFromCookie();
@@ -48,50 +49,57 @@ const TaskCard = async ({
     (task) => task.status === TASK_STATUS.COMPLETED
   );
 
-  const renderTaskGroup = (tasks: Task[], heading: string, color: string) => (
+  const renderTaskGroup = (tasks: Task[], heading: string) => (
     <div className="mt-6">
-      <h3 className={`text-xl font-semibold ${color} mb-2`}>{heading}</h3>
-      {tasks.length ? (
-        tasks.map((task) => (
-          <div
-            key={task.id}
-            className="flex justify-between md:flex-row flex-col"
-          >
-            <div className="py-2">
-              <div>
-                <span className="text-2xl text-gray-700 ">{task.name}</span>
-              </div>
-              <div>
-                <span className="text-sm text-gray-500">
-                  {task.description}
-                </span>
-              </div>
-            </div>
-            <div className="flex md:gap-3 justify-end flex-wrap md:flex-nowrap">
-              {task.status !== TASK_STATUS.COMPLETED && (
-                <IsStarted task={task} projectId={projectId || ""} />
-              )}
+      <GlassPane
+        className={`text-xl font-semibold text-white p-3 mb-2 rounded-3xl`}
+      >
+        {heading}
+      </GlassPane>
 
-              <IsChecked task={task} projectId={projectId || ""} />
+      <Card className="flex justify-between md:flex-row flex-col gap-10">
+        {tasks.length ? (
+          tasks.map((task) => (
+            <div
+              key={task.id}
+              className="flex justify-between md:flex-row flex-col gap-2"
+            >
+              <div className="py-2">
+                <div>
+                  <span className="text-2xl text-gray-700 ">{task.name}</span>
+                </div>
+                <div>
+                  <span className="text-sm text-gray-500">
+                    {task.description}
+                  </span>
+                </div>
+              </div>
+              <GlassPane className="rounded-3xl flex md:gap-3 justify-end flex-wrap md:flex-nowrap mb-2">
+                {task.status !== TASK_STATUS.COMPLETED && (
+                  <IsStarted task={task} projectId={projectId || ""} />
+                )}
 
-              <EditTask
-                id={task.id}
-                projectId={projectId || ""}
-                name={task.name}
-                description={task.description}
-              />
-              <DeleteButton task={task} projectId={projectId || ""} />
+                <IsChecked task={task} projectId={projectId || ""} />
+
+                <EditTask
+                  id={task.id}
+                  projectId={projectId || ""}
+                  name={task.name}
+                  description={task.description}
+                />
+                <DeleteButton task={task} projectId={projectId || ""} />
+              </GlassPane>
             </div>
-          </div>
-        ))
-      ) : (
-        <div className="text-gray-400 italic">No tasks</div>
-      )}
+          ))
+        ) : (
+          <div className="text-gray-400 italic">No tasks</div>
+        )}
+      </Card>
     </div>
   );
 
   return (
-    <Card>
+    <div>
       <div className="flex justify-between items-center">
         <div>
           <span className="text-3xl text-gray-600">{title || ""}</span>
@@ -101,10 +109,10 @@ const TaskCard = async ({
         </div>
       </div>
 
-      {renderTaskGroup(notStartedTasks, "To Start", "text-red-600")}
-      {renderTaskGroup(startedTasks, "In Progress", "text-yellow-600")}
-      {renderTaskGroup(completedTasks, "Done", "text-green-600")}
-    </Card>
+      {renderTaskGroup(notStartedTasks, "To Start")}
+      {renderTaskGroup(startedTasks, "In Progress")}
+      {renderTaskGroup(completedTasks, "Done")}
+    </div>
   );
 };
 

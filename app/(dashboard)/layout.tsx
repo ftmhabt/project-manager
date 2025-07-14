@@ -11,7 +11,7 @@ export default function DashboardRootLayout({
     <html>
       <head />
       <body className="h-screen w-screen candy-mesh text-white p-3 md:p-6">
-        <GlassPane className="w-full h-full flex p-3 md:p-6 pr-0 md:flex-row flex-col-reverse">
+        <GlassPane className="rounded-4xl w-full h-full flex p-3 md:p-6 pr-0 md:flex-row flex-col-reverse">
           <Sidebar />
           {children}
         </GlassPane>
