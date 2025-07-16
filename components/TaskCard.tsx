@@ -50,14 +50,12 @@ const TaskCard = async ({
   );
 
   const renderTaskGroup = (tasks: Task[], heading: string) => (
-    <div className="mt-6">
-      <GlassPane
-        className={`text-xl font-semibold text-white p-3 mb-2 rounded-3xl`}
-      >
+    <GlassPane className="mt-6 rounded-3xl">
+      <div className={`text-xl font-semibold text-white p-3 px-8 mb-2 `}>
         {heading}
-      </GlassPane>
+      </div>
 
-      <Card className="flex justify-between md:flex-row flex-col gap-10">
+      <Card className="flex justify-between flex-col gap-10">
         {tasks.length ? (
           tasks.map((task) => (
             <div
@@ -74,7 +72,7 @@ const TaskCard = async ({
                   </span>
                 </div>
               </div>
-              <GlassPane className="rounded-3xl flex md:gap-3 justify-end flex-wrap md:flex-nowrap mb-2">
+              <GlassPane className="rounded-3xl flex md:gap-3 justify-end flex-wrap md:flex-nowrap sm:mb-0 mb-2">
                 {task.status !== TASK_STATUS.COMPLETED && (
                   <IsStarted task={task} projectId={projectId || ""} />
                 )}
@@ -88,7 +86,7 @@ const TaskCard = async ({
           <div className="text-gray-400 italic">No tasks</div>
         )}
       </Card>
-    </div>
+    </GlassPane>
   );
 
   return (
