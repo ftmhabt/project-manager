@@ -1,23 +1,31 @@
 "use client";
-import { createNewProject } from "@/lib/api";
-import { useState } from "react";
+import { FormEvent, useState, useTransition } from "react";
 import Modal from "react-modal";
 import Button from "./Button";
 import Input from "./Input";
+import { createNewProject } from "@/app/actions/createNewProject";
 
 Modal.setAppElement("#modal");
 
 const NewProject = () => {
   const [isModalOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
+  const [isPending, startTransition] = useTransition();
 
   const closeModal = () => setIsOpen(false);
   const openModal = () => setIsOpen(true);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    await createNewProject(name);
-    closeModal();
+    startTransition(async () => {
+      try {
+        await createNewProject(name);
+      } catch (err) {
+        console.error("Server action failed:", err);
+      } finally {
+        closeModal();
+      }
+    });
   };
 
   return (
@@ -37,7 +45,15 @@ const NewProject = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <Button type="submit">Create</Button>
+          <Button type="submit">
+            {isPending ? (
+              <div
+                className={`h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent`}
+              />
+            ) : (
+              "Create"
+            )}
+          </Button>
         </form>
       </Modal>
     </div>
