@@ -90,16 +90,15 @@ const TaskCard = async ({
   );
 
   return (
-    <div>
-      <div className="flex justify-between items-center">
+    <div className="relative">
+      <Card className="flex justify-between items-center sticky z-10 left-0 top-0 w-full">
         <div>
           <span className="text-3xl text-gray-600">{title || ""}</span>
         </div>
         <div>
           <Newtask projectId={projectId} />
         </div>
-      </div>
-
+      </Card>
       {renderTaskGroup(notStartedTasks, "To Start")}
       {renderTaskGroup(startedTasks, "In Progress")}
       {renderTaskGroup(completedTasks, "Done")}

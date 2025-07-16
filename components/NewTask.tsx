@@ -22,11 +22,11 @@ const Newtask = ({ projectId }: { projectId?: string }) => {
   };
 
   return (
-    <div className="px-6 py-6 hover:scale-105 transition-all ease-in-out duration-200 flex justify-center items-center">
+    <div className="py-6 hover:scale-105 transition-all ease-in-out duration-200 flex justify-center items-center">
       <Button
         onClick={() => openModal()}
         intent="text"
-        className="text-violet-600"
+        className="text-violet-600 "
       >
         + New Task
       </Button>
