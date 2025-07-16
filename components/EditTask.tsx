@@ -1,11 +1,10 @@
 "use client";
-import { editTask } from "@/lib/api";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import Modal from "react-modal";
 import Button from "./Button";
 import Input from "./Input";
 import ActionButton from "./ActionButton";
-import { useRouter } from "next/navigation";
+import { updateTask } from "@/app/actions/updateTask";
 
 Modal.setAppElement("#modal");
 
@@ -24,14 +23,12 @@ const EditTask = ({
   const [name, setName] = useState(taskName);
   const [description, setDescription] = useState(taskDesc);
 
-  const router = useRouter();
   const closeModal = () => setIsOpen(false);
   const openModal = () => setIsOpen(true);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    await editTask({ id, name, description, projectId });
-    router.refresh();
+    await updateTask({ id, name, description, projectId });
     closeModal();
   };
 
