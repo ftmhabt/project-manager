@@ -9,6 +9,7 @@ import DeleteButton from "./DeleteButton";
 import EditTask from "./EditTask";
 import GlassPane from "./GlassPane";
 
+const NUMBERS: number = 10;
 const getData = async () => {
   const user = await getUserFromCookie();
   const tasks = await db.task.findMany({
@@ -19,7 +20,7 @@ const getData = async () => {
         deleted: false,
       },
     },
-    take: 5,
+    take: NUMBERS,
     orderBy: {
       due: "asc",
     },
@@ -93,7 +94,9 @@ const TaskCard = async ({
     <div className="relative">
       <Card className="flex justify-between items-center sticky z-10 left-0 top-0 w-full">
         <div>
-          <span className="text-3xl text-gray-600">{title || ""}</span>
+          <span className="text-3xl text-gray-600">
+            {title || `${NUMBERS} upcoming task${NUMBERS === 1 ? "" : "s"}`}
+          </span>
         </div>
         <div>
           <Newtask projectId={projectId} />
@@ -101,7 +104,8 @@ const TaskCard = async ({
       </Card>
       {renderTaskGroup(notStartedTasks, "To Start")}
       {renderTaskGroup(startedTasks, "In Progress")}
-      {renderTaskGroup(completedTasks, "Done")}
+
+      {title && renderTaskGroup(completedTasks, "Done")}
     </div>
   );
 };
