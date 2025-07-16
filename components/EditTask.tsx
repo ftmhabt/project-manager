@@ -1,43 +1,35 @@
 "use client";
 import { FormEvent, useState } from "react";
 import Modal from "react-modal";
-import Button from "./Button";
-import Input from "./Input";
 import ActionButton from "./ActionButton";
+import Input from "./Input";
+import Button from "./Button";
 import { updateTask } from "@/app/actions/updateTask";
+import { Task } from "@/app/generated/prisma";
 
 Modal.setAppElement("#modal");
 
-const EditTask = ({
-  id,
-  projectId,
-  name: taskName,
-  description: taskDesc,
-}: {
-  id: string;
-  projectId: string;
-  name: string;
-  description: string;
-}) => {
+const EditTask = ({ task, projectId }: { task: Task; projectId: string }) => {
   const [isModalOpen, setIsOpen] = useState(false);
-  const [name, setName] = useState(taskName);
-  const [description, setDescription] = useState(taskDesc);
+  const [name, setName] = useState(task.name);
+  const [description, setDescription] = useState(task.description);
 
   const closeModal = () => setIsOpen(false);
   const openModal = () => setIsOpen(true);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    await updateTask({ id, name, description, projectId });
+    await updateTask({ id: task.id, name, description, projectId });
     closeModal();
   };
 
   return (
     <>
       <ActionButton
-        id={id}
+        id={task.id}
         label="Edit"
         textColor="text-fuchsia-500"
+        loaderColor="border-fuchsia-500"
         loading={false}
         onClick={() => openModal()}
       />

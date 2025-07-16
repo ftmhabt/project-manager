@@ -78,15 +78,8 @@ const TaskCard = async ({
                 {task.status !== TASK_STATUS.COMPLETED && (
                   <IsStarted task={task} projectId={projectId || ""} />
                 )}
-
                 <IsChecked task={task} projectId={projectId || ""} />
-
-                <EditTask
-                  id={task.id}
-                  projectId={projectId || ""}
-                  name={task.name}
-                  description={task.description}
-                />
+                <EditTask task={task} projectId={projectId || ""} />
                 <DeleteButton task={task} projectId={projectId || ""} />
               </GlassPane>
             </div>
