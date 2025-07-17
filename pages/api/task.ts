@@ -18,6 +18,7 @@ export default async function handler(
           ownerId: user.id,
           projectId: req.body.projectId,
           description: req.body.description,
+          due: req.body.due,
           status: "NOT_STARTED",
         },
       });

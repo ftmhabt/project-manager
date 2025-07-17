@@ -4,6 +4,8 @@ import { useState } from "react";
 import Modal from "react-modal";
 import Button from "./Button";
 import Input from "./Input";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 Modal.setAppElement("#modal");
 
@@ -11,13 +13,14 @@ const Newtask = ({ projectId }: { projectId?: string }) => {
   const [isModalOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
 
   const closeModal = () => setIsOpen(false);
   const openModal = () => setIsOpen(true);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createNewTask({ name, description, projectId });
+    await createNewTask({ name, description, projectId, due: startDate });
     closeModal();
   };
 
@@ -49,6 +52,13 @@ const Newtask = ({ projectId }: { projectId?: string }) => {
             placeholder="task description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+          />
+          <DatePicker
+            className="boeder-solid border-black/40 border-2 px-6 py-2 text-lg rounded-3xl min-w-[80px] text-black"
+            selected={startDate}
+            onChange={(date) => setStartDate(date!)}
+            showTimeSelect
+            dateFormat="Pp"
           />
           <Button type="submit">Create</Button>
         </form>
