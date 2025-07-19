@@ -13,7 +13,6 @@ const Input: FC<InputHTMLAttributes<HTMLInputElement>> = ({
         className
       )}
       {...props}
-      //put control stuff somewhere else for this component to remain server component
     />
   );
 };

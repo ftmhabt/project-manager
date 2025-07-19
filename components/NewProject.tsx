@@ -36,10 +36,13 @@ const NewProject = () => {
         isOpen={isModalOpen}
         onRequestClose={() => closeModal()}
         overlayClassName="bg-[rgba(0,0,0,0.4)] flex justify-center items-center absolute top-0 left-0 h-screen w-screen"
-        className="w-3/4 bg-white rounded-xl p-8"
+        className="w-72 bg-white rounded-xl p-6 sm:p-8"
       >
-        <h1 className="text-xl mb-5">New Project</h1>
-        <form className="flex items-center" onSubmit={handleSubmit}>
+        <h1 className="text-xl mb-5 text-black text-center">New Project</h1>
+        <form
+          className="flex items-center flex-col gap-3"
+          onSubmit={handleSubmit}
+        >
           <Input
             placeholder="project name"
             value={name}
