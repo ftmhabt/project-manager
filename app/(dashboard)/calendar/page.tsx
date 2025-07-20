@@ -1,6 +1,6 @@
 import { getUserFromCookie } from "@/lib/auth";
 import { db } from "@/lib/db";
-import ActiveTaskCalendar from "@/components/ActiveTaskCalendar";
+import ActiveTaskCalendar from "@/components/calendar/ActiveTaskCalendar";
 
 const getData = async () => {
   const user = await getUserFromCookie();

@@ -1,0 +1,15 @@
+.occupiedDay {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: hsla(271, 78%, 63%, 1);
+    border-radius: 9999px;
+  }
+}
