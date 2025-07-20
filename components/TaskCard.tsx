@@ -8,7 +8,7 @@ import IsChecked from "./IsChecked";
 import DeleteButton from "./DeleteButton";
 import EditTask from "./EditTask";
 import GlassPane from "./GlassPane";
-import { calculateDue, timeLeftUntil } from "@/lib/due";
+import { timeLeftUntil } from "@/lib/due";
 
 const NUMBERS: number = 10;
 const getData = async () => {
@@ -62,9 +62,9 @@ const TaskCard = async ({
           tasks.map((task) => (
             <div
               key={task.id}
-              className="flex justify-between md:flex-row flex-col gap-2  w-full"
+              className="flex md:flex-row flex-col gap-2 w-full"
             >
-              <div className="py-2">
+              <div className="py-2 w-full">
                 <div>
                   <span className="text-2xl text-gray-700 ">{task.name}</span>
                 </div>
@@ -72,7 +72,7 @@ const TaskCard = async ({
                   <span className="text-sm text-gray-500">
                     {task.description}
                   </span>
-                  <span className="text-sm text-gray-500">
+                  <span className="text-sm text-gray-500 justify-self-end md:justify-self-auto">
                     {task.due && timeLeftUntil(task.due)}
                   </span>
                 </div>
