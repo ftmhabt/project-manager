@@ -79,11 +79,11 @@ const TaskCard = async ({
               </div>
               <GlassPane className="rounded-3xl flex md:gap-3 justify-end flex-wrap md:flex-nowrap sm:mb-0 mb-2">
                 {task.status !== TASK_STATUS.COMPLETED && (
-                  <IsStarted task={task} projectId={projectId || ""} />
+                  <IsStarted task={task} />
                 )}
-                <IsChecked task={task} projectId={projectId || ""} />
-                <EditTask task={task} projectId={projectId || ""} />
-                <DeleteButton task={task} projectId={projectId || ""} />
+                <IsChecked task={task} />
+                <EditTask task={task} />
+                <DeleteButton task={task} />
               </GlassPane>
             </div>
           ))

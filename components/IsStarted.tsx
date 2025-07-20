@@ -5,12 +5,7 @@ import { Task, TASK_STATUS } from "@/app/generated/prisma";
 import { updateTaskStatus } from "@/app/actions/changeTaskStatus";
 import ActionButton from "./ActionButton";
 
-interface IsStartedProps {
-  projectId: string;
-  task: Task;
-}
-
-export default function IsStarted({ task, projectId }: IsStartedProps) {
+export default function IsStarted({ task }: { task: Task }) {
   const [isStarted, setIsStarted] = useState(
     task.status === TASK_STATUS.STARTED
   );
@@ -23,7 +18,11 @@ export default function IsStarted({ task, projectId }: IsStartedProps) {
 
     startTransition(async () => {
       try {
-        await updateTaskStatus({ id: task.id, projectId, status: newStatus });
+        await updateTaskStatus({
+          id: task.id,
+          projectId: task.projectId,
+          status: newStatus,
+        });
       } catch (err) {
         setIsStarted(isStarted);
         console.error("Server action failed:", err);

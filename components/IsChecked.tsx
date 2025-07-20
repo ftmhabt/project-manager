@@ -5,12 +5,7 @@ import { Task, TASK_STATUS } from "@/app/generated/prisma";
 import { updateTaskStatus } from "@/app/actions/changeTaskStatus";
 import ActionButton from "./ActionButton";
 
-interface IsCheckedProps {
-  projectId: string;
-  task: Task;
-}
-
-export default function IsChecked({ task, projectId }: IsCheckedProps) {
+export default function IsChecked({ task }: { task: Task }) {
   const [isChecked, setIsChecked] = useState(
     task.status === TASK_STATUS.COMPLETED
   );
@@ -25,7 +20,11 @@ export default function IsChecked({ task, projectId }: IsCheckedProps) {
 
     startTransition(async () => {
       try {
-        await updateTaskStatus({ id: task.id, projectId, status: newStatus });
+        await updateTaskStatus({
+          id: task.id,
+          projectId: task.projectId,
+          status: newStatus,
+        });
       } catch (err) {
         setIsChecked(isChecked);
         console.error("Server action failed:", err);

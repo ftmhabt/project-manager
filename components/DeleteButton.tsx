@@ -5,18 +5,16 @@ import { Task } from "@/app/generated/prisma";
 import { deleteTask } from "@/app/actions/deleteTask";
 import ActionButton from "./ActionButton";
 
-interface DeleteButtonProps {
-  projectId: string;
-  task: Task;
-}
-
-export default function DeleteButton({ task, projectId }: DeleteButtonProps) {
+export default function DeleteButton({ task }: { task: Task }) {
   const [isPending, startTransition] = useTransition();
 
   const handleClick = () => {
     startTransition(async () => {
       try {
-        await deleteTask({ id: task.id, projectId });
+        await deleteTask({
+          id: task.id,
+          projectId: task.projectId,
+        });
       } catch (err) {
         console.error("Server action failed:", err);
       }

@@ -9,7 +9,7 @@ import { Task } from "@/app/generated/prisma";
 
 Modal.setAppElement("#modal");
 
-const EditTask = ({ task, projectId }: { task: Task; projectId: string }) => {
+const EditTask = ({ task }: { task: Task }) => {
   const [isModalOpen, setIsOpen] = useState(false);
   const [name, setName] = useState(task.name);
   const [description, setDescription] = useState(task.description);
@@ -19,7 +19,12 @@ const EditTask = ({ task, projectId }: { task: Task; projectId: string }) => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    await updateTask({ id: task.id, name, description, projectId });
+    await updateTask({
+      id: task.id,
+      name,
+      description,
+      projectId: task.projectId,
+    });
     closeModal();
   };
 
