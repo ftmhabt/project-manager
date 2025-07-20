@@ -20,10 +20,8 @@ export function timeLeftUntil(targetDate: Date): string {
     parts.push(`${duration.days} day${duration.days > 1 ? "s" : ""}`);
   if (duration.hours)
     parts.push(`${duration.hours} hour${duration.hours > 1 ? "s" : ""}`);
-  if (duration.minutes)
-    parts.push(`${duration.minutes} minute${duration.minutes > 1 ? "s" : ""}`);
 
   return parts.length > 0
     ? parts.join(", ") + " left"
-    : "Less than a minute left";
+    : "Less than an hour left";
 }
