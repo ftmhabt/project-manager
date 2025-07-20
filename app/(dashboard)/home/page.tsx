@@ -3,14 +3,12 @@ import GreetingsSkeleton from "@/components/GreetingsSkeleton";
 import NewProject from "@/components/NewProject";
 import ProjectCard from "@/components/ProjectCard";
 import TaskCard from "@/components/TaskCard";
-import { delay } from "@/lib/async";
 import { getUserFromCookie } from "@/lib/auth";
 import { db } from "@/lib/db";
 import Link from "next/link";
 import { Suspense } from "react";
 
 export const getData = async () => {
-  await delay(2000);
   const user = await getUserFromCookie();
 
   const projects = await db.project.findMany({
