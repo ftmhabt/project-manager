@@ -9,7 +9,7 @@ import { db } from "@/lib/db";
 import Link from "next/link";
 import { Suspense } from "react";
 
-const getData = async () => {
+export const getData = async () => {
   await delay(2000);
   const user = await getUserFromCookie();
 

@@ -25,3 +25,87 @@
     radial-gradient(at 89% 8%, hsla(330, 100%, 85%, 1) 0px, transparent 50%),
     radial-gradient(at 35% 44%, hsla(240, 100%, 85%, 1) 0px, transparent 50%);
 }
+
+.rdp-root {
+  --rdp-accent-color: hsla(
+    271,
+    78%,
+    63%,
+    1
+  ) !important; /* Use blue as the accent color. */
+  --rdp-day-height: 38px !important;
+  --rdp-day-width: 38px !important;
+  --rdp-day_button-height: 38px !important;
+  --rdp-day_button-width: 38px !important;
+}
+
+.rd-day-picker {
+  min-height: fit-content !important;
+  display: flex;
+  flex-direction: column;
+}
+
+.rdp-months {
+  max-width: 100% !important;
+  min-height: fit-content !important;
+}
+.rdp-month {
+  max-width: 100% !important;
+  width: 100% !important;
+  min-height: fit-content !important;
+}
+/* Make the month grid fill space */
+.rd-day-picker .rdp-month {
+  min-height: fit-content !important;
+  flex: 1;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.rdp-weeks {
+  width: 100%;
+  min-height: fit-content !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.rdp-week {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+/* Make the table (calendar) grow */
+.rdp-month_grid {
+  height: 90%;
+  width: 100%;
+  padding-top: 1rem;
+}
+
+.rdp-weekdays {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* Make each week row take equal space */
+.rdp-tbody {
+  min-height: fit-content !important;
+  display: grid;
+  grid-template-rows: repeat(6, 1fr); /* Max 6 weeks */
+}
+
+/* Make day cells fill each row */
+.rdp-tbody tr {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  min-height: fit-content !important;
+}
+
+/* Fill day buttons inside cells */
+.rdp-day {
+  min-height: fit-content !important;
+  width: 100% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
