@@ -14,6 +14,7 @@ import Card from "../Card";
 import TaskList from "./TaskList";
 import ToggleCompletedButton from "./ToggleCompletedButton";
 import styles from "@/styles/ActiveItemCalendar.module.scss";
+import Newtask from "../NewTask";
 
 export default function ActiveItemCalendar({ tasks }: { tasks: Task[] }) {
   const [selectedDay, setSelectedDay] = useState<Date>(new Date());
@@ -40,6 +41,7 @@ export default function ActiveItemCalendar({ tasks }: { tasks: Task[] }) {
           showCompleted={showCompleted}
           onToggle={() => setShowCompleted((prev) => !prev)}
         />
+        <Newtask />
       </Card>
       <Card className="w-full h-full">
         <div className="flex-1">

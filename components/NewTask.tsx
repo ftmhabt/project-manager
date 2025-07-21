@@ -1,12 +1,13 @@
 "use client";
-import { createNewTask } from "@/lib/api";
-import { useState } from "react";
+import { useState, useEffect, useTransition } from "react";
 import Modal from "react-modal";
-import Button from "./Button";
-import Input from "./Input";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+
+import Button from "./Button";
+import Input from "./Input";
 import { createTask } from "@/app/actions/createTask";
+import { getAllProjects } from "@/app/actions/getAllProjects";
 
 Modal.setAppElement("#modal");
 
@@ -16,29 +17,51 @@ const Newtask = ({ projectId }: { projectId?: string }) => {
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState(new Date());
 
+  const [projects, setProjects] = useState<{ id: string; name: string }[]>([]);
+  const [selectedProjectId, setSelectedProjectId] = useState(projectId || "");
+
+  const [isPending, startTransition] = useTransition();
+
+  useEffect(() => {
+    if (!projectId) {
+      startTransition(async () => {
+        const projectsFromServer = await getAllProjects();
+        setProjects(projectsFromServer);
+      });
+    }
+  }, [projectId]);
+
   const closeModal = () => setIsOpen(false);
   const openModal = () => setIsOpen(true);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createTask({ name, description, projectId, due: startDate });
+    const finalProjectId = projectId || selectedProjectId;
+    if (!finalProjectId) return alert("Please select a project");
+
+    await createTask({
+      name,
+      description,
+      projectId: finalProjectId,
+      due: startDate,
+    });
+
     closeModal();
   };
 
   return (
     <div className="py-6 hover:scale-105 transition-all ease-in-out duration-200 flex justify-center items-center">
-      {projectId && (
-        <Button
-          onClick={() => openModal()}
-          intent="text"
-          className="text-violet-600 "
-        >
-          + New Task
-        </Button>
-      )}
+      <Button
+        onClick={() => openModal()}
+        intent="text"
+        className="text-violet-600"
+      >
+        + New Task
+      </Button>
+
       <Modal
         isOpen={isModalOpen}
-        onRequestClose={() => closeModal()}
+        onRequestClose={closeModal}
         overlayClassName="bg-[rgba(0,0,0,0.4)] flex justify-center items-center absolute top-0 left-0 h-screen w-screen"
         className="w-72 bg-white rounded-xl p-6 sm:p-8"
       >
@@ -46,6 +69,21 @@ const Newtask = ({ projectId }: { projectId?: string }) => {
           className="flex items-center flex-col gap-3"
           onSubmit={handleSubmit}
         >
+          {!projectId && (
+            <select
+              value={selectedProjectId}
+              onChange={(e) => setSelectedProjectId(e.target.value)}
+              className="border-2 border-gray-400 rounded-3xl px-4 py-2 w-60 text-black"
+              disabled={isPending}
+            >
+              <option value="">Select a project</option>
+              {projects.map((project) => (
+                <option key={project.id} value={project.id}>
+                  {project.name}
+                </option>
+              ))}
+            </select>
+          )}
           <Input
             placeholder="task name"
             value={name}
