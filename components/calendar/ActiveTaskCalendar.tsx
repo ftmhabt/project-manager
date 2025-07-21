@@ -41,7 +41,7 @@ export default function ActiveItemCalendar({ tasks }: { tasks: Task[] }) {
           showCompleted={showCompleted}
           onToggle={() => setShowCompleted((prev) => !prev)}
         />
-        <Newtask />
+        <Newtask selectedDay={selectedDay} />
       </Card>
       <Card className="w-full h-full">
         <div className="flex-1">

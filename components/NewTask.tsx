@@ -11,11 +11,17 @@ import { getAllProjects } from "@/app/actions/getAllProjects";
 
 Modal.setAppElement("#modal");
 
-const Newtask = ({ projectId }: { projectId?: string }) => {
+const Newtask = ({
+  projectId,
+  selectedDay,
+}: {
+  projectId?: string;
+  selectedDay?: Date;
+}) => {
   const [isModalOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(selectedDay || new Date());
 
   const [projects, setProjects] = useState<{ id: string; name: string }[]>([]);
   const [selectedProjectId, setSelectedProjectId] = useState(projectId || "");
@@ -30,6 +36,12 @@ const Newtask = ({ projectId }: { projectId?: string }) => {
       });
     }
   }, [projectId]);
+
+  useEffect(() => {
+    if (isModalOpen && selectedDay) {
+      setStartDate(selectedDay);
+    }
+  }, [isModalOpen, selectedDay]);
 
   const closeModal = () => setIsOpen(false);
   const openModal = () => setIsOpen(true);
