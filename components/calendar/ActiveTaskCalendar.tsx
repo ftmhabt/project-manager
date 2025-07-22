@@ -26,8 +26,8 @@ export default function ActiveItemCalendar({ tasks }: { tasks: Task[] }) {
   const visibleItems = useVisibleItems(activeItems, showCompleted);
 
   return (
-    <div className="sm:grid sm:grid-cols-2 flex flex-col gap-3 sm:gap-6 w-full h-full pr-3">
-      <Card className="px-4 sm:px-8 py-4 flex flex-col gap-5">
+    <div className="sm:flex sm:flex-row flex flex-col gap-3 sm:gap-6 w-full h-full pr-3 items-stretch">
+      <Card className="px-4 sm:px-8 py-4 flex flex-col gap-5 h-full flex-1">
         <DayPicker
           mode="single"
           selected={selectedDay}
@@ -39,17 +39,18 @@ export default function ActiveItemCalendar({ tasks }: { tasks: Task[] }) {
           className="w-full min-h-fit text-purple-900"
           required={true}
         />
-        <div className="flex justify-between">
+        <div className="flex gap-3">
           <Newtask selectedDay={selectedDay} />
           <ToggleCompletedButton
             showCompleted={showCompleted}
             onToggle={() => setShowCompleted((prev) => !prev)}
           />
         </div>
-
-        <Agenda selectedDate={selectedDay} />
+        <div className="flex-1 overflow-hidden">
+          <Agenda selectedDate={selectedDay} />
+        </div>
       </Card>
-      <Card className="w-full h-full">
+      <Card className="w-full h-full flex-1">
         <div className="flex-1">
           <h2 className="text-lg font-semibold">
             {selectedDay

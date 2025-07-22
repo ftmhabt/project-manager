@@ -1,4 +1,5 @@
 import ActionButton from "../ActionButton";
+import GlassPane from "../GlassPane";
 
 interface Props {
   showCompleted: boolean;
@@ -10,14 +11,16 @@ export default function ToggleCompletedButton({
   onToggle,
 }: Props) {
   return (
-    <ActionButton
-      id="toggle"
-      label={
-        showCompleted ? "Do not show completed tasks" : "Show completed tasks"
-      }
-      onClick={onToggle}
-      loading={false}
-      textColor="text-purple-900"
-    />
+    <GlassPane className="rounded-3xl flex justify-center items-center border-purple-700 w-full">
+      <ActionButton
+        id="toggle"
+        label={
+          showCompleted ? "Do not show completed tasks" : "Show completed tasks"
+        }
+        onClick={onToggle}
+        loading={false}
+        textColor="text-purple-900"
+      />
+    </GlassPane>
   );
 }
