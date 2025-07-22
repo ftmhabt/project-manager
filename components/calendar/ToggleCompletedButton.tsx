@@ -17,6 +17,7 @@ export default function ToggleCompletedButton({
       }
       onClick={onToggle}
       loading={false}
+      textColor="text-purple-900"
     />
   );
 }
