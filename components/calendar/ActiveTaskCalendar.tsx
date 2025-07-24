@@ -36,7 +36,7 @@ export default function ActiveItemCalendar({ tasks }: { tasks: Task[] }) {
           modifiersClassNames={{ occupied: styles.occupiedDay }}
           navLayout="around"
           showOutsideDays
-          className="w-full min-h-fit text-purple-900"
+          className="w-full min-h-fit text-black"
           required={true}
         />
         <div className="flex gap-3">
@@ -52,10 +52,10 @@ export default function ActiveItemCalendar({ tasks }: { tasks: Task[] }) {
       </Card>
       <Card className="w-full h-full flex-1">
         <div className="flex-1">
-          <h2 className="text-lg font-semibold">
+          <h2 className="text-lg font-semibold text-black">
             {selectedDay
-              ? `Items active on ${format(selectedDay, "PPP")}`
-              : "Select a day to see active items"}
+              ? `Tasks active on ${format(selectedDay, "PPP")}`
+              : "Select a day to see active tasks"}
           </h2>
           <TaskList tasks={visibleItems} selectedDay={selectedDay} />
         </div>

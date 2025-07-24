@@ -40,7 +40,7 @@ export default function Agenda({ selectedDate }: { selectedDate: Date }) {
   );
 
   return (
-    <GlassPane className="rounded-3xl sm:p-6 p-2 pastel-mesh text-white flex flex-col h-full overflow-hidden">
+    <GlassPane className="rounded-3xl sm:p-6 p-2 bg-violet-500 text-white flex flex-col h-full overflow-hidden">
       <h3 className="text-lg font-semibold pl-3 shrink-0 mb-3">Agenda</h3>
 
       {loading ? (

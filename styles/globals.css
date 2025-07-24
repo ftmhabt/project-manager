@@ -28,7 +28,7 @@
 
 /* calendar styles*/
 .rdp-root {
-  --rdp-accent-color: hsla(271, 78%, 63%, 1) !important;
+  --rdp-accent-color: #8b5cf6 !important;
   --rdp-day-height: 38px !important;
   --rdp-day-width: 38px !important;
   --rdp-day_button-height: 38px !important;
