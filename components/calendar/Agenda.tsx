@@ -64,27 +64,29 @@ export default function Agenda({ selectedDate }: { selectedDate: Date }) {
               </p>
             )}
           </div>
-          <Card className="grid gap-4 rounded-2xl flex-1 overflow-hidden p-5 pt-4  text-xs">
-            {todayTasks.length > 0 && (
-              <div className="flex flex-col overflow-hidden">
-                <h4 className="font-semibold text-gray-800 mb-1 shrink-0">
-                  Due Today
-                </h4>
-                <ul className="space-y-2 overflow-y-auto overflow-x-hidden pr-1 flex-1">
-                  {renderTaskList(todayTasks, "border-violet-500")}
-                </ul>
-              </div>
-            )}
-            {weekTasks.length > 0 && (
-              <div className="flex flex-col overflow-hidden">
-                <h4 className="font-semibold text-gray-800 mb-1 shrink-0">
-                  Due This Week
-                </h4>
-                <ul className="space-y-2 overflow-y-auto pr-1 flex-1">
-                  {renderTaskList(weekTasks, "border-violet-500", true)}
-                </ul>
-              </div>
-            )}
+          <Card className="flex gap-4 rounded-2xl flex-1 overflow-hidden p-5 pt-4 text-xs">
+            <div className="flex flex-col flex-1 overflow-y-auto">
+              {todayTasks.length > 0 && (
+                <div className="flex flex-col">
+                  <h4 className="font-semibold text-gray-800 mb-1 shrink-0">
+                    Due Today
+                  </h4>
+                  <ul className="space-y-2 overflow-y-auto pr-1 flex-1">
+                    {renderTaskList(todayTasks, "border-violet-500")}
+                  </ul>
+                </div>
+              )}
+              {weekTasks.length > 0 && (
+                <div className="flex flex-col">
+                  <h4 className="font-semibold text-gray-800 mb-1 shrink-0">
+                    Due This Week
+                  </h4>
+                  <ul className="space-y-2 pr-1">
+                    {renderTaskList(weekTasks, "border-violet-500", true)}
+                  </ul>
+                </div>
+              )}
+            </div>
           </Card>
         </div>
       )}
