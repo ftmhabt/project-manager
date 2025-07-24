@@ -26,8 +26,8 @@ export default function ActiveItemCalendar({ tasks }: { tasks: Task[] }) {
   const visibleItems = useVisibleItems(activeItems, showCompleted);
 
   return (
-    <div className="sm:flex sm:flex-row flex flex-col gap-3 sm:gap-6 w-full h-full pr-3 items-stretch">
-      <Card className="px-4 sm:px-8 py-4 flex flex-col gap-5 h-full flex-1">
+    <div className="sm:flex sm:flex-row flex flex-col gap-3 sm:gap-6 w-full h-full pr-3 overflow-auto">
+      <Card className="p-2 sm:px-8 sm:py-4 flex flex-col gap-2 sm:gap-5 h-full flex-1">
         <DayPicker
           mode="single"
           selected={selectedDay}

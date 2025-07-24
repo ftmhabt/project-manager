@@ -39,21 +39,8 @@ export default function Agenda({ selectedDate }: { selectedDate: Date }) {
     task.due ? isSameWeek(task.due, selectedDate, { weekStartsOn: 0 }) : false
   );
 
-  const getStatusIcon = (status: Task["status"]) => {
-    switch (status) {
-      case "NOT_STARTED":
-        return "⚪";
-      case "STARTED":
-        return "🟡";
-      case "COMPLETED":
-        return "✅";
-      default:
-        return "❓";
-    }
-  };
-
   return (
-    <GlassPane className="rounded-3xl p-6 pastel-mesh text-white flex flex-col h-full overflow-hidden">
+    <GlassPane className="rounded-3xl sm:p-6 p-2 pastel-mesh text-white flex flex-col h-full overflow-hidden">
       <h3 className="text-lg font-semibold pl-3 shrink-0 mb-3">Agenda</h3>
 
       {loading ? (
@@ -77,27 +64,14 @@ export default function Agenda({ selectedDate }: { selectedDate: Date }) {
               </p>
             )}
           </div>
-          <Card className="flex flex-col gap-4 rounded-2xl flex-1 overflow-hidden p-5 pt-4">
+          <Card className="grid gap-4 rounded-2xl flex-1 overflow-hidden p-5 pt-4  text-xs">
             {todayTasks.length > 0 && (
               <div className="flex flex-col overflow-hidden">
                 <h4 className="font-semibold text-gray-800 mb-1 shrink-0">
                   Due Today
                 </h4>
                 <ul className="space-y-2 overflow-y-auto overflow-x-hidden pr-1 flex-1">
-                  {todayTasks.map((task) => (
-                    <li
-                      key={task.id}
-                      className="flex items-start gap-2 border-l-2 pl-2 border-purple-400"
-                    >
-                      <span>{getStatusIcon(task.status)}</span>
-                      <div>
-                        <p className="font-medium">{task.name}</p>
-                        <p className="text-xs text-gray-500">
-                          📁 {task.project.name}
-                        </p>
-                      </div>
-                    </li>
-                  ))}
+                  {renderTaskList(todayTasks, "border-violet-500")}
                 </ul>
               </div>
             )}
@@ -107,23 +81,7 @@ export default function Agenda({ selectedDate }: { selectedDate: Date }) {
                   Due This Week
                 </h4>
                 <ul className="space-y-2 overflow-y-auto pr-1 flex-1">
-                  {weekTasks.map((task) => (
-                    <li
-                      key={task.id}
-                      className="flex items-start gap-2 border-l-2 pl-2 border-blue-400"
-                    >
-                      <span>{getStatusIcon(task.status)}</span>
-                      <div>
-                        <p className="font-medium">{task.name}</p>
-                        <p className="text-xs text-gray-500">
-                          📁 {task.project.name}
-                        </p>
-                        <p className="text-xs text-gray-400">
-                          📆 {task.due?.toLocaleDateString()}
-                        </p>
-                      </div>
-                    </li>
-                  ))}
+                  {renderTaskList(weekTasks, "border-violet-500", true)}
                 </ul>
               </div>
             )}
@@ -131,5 +89,51 @@ export default function Agenda({ selectedDate }: { selectedDate: Date }) {
         </div>
       )}
     </GlassPane>
+  );
+}
+
+function renderTaskList(
+  tasks: Task[],
+  borderColor: string,
+  showDueDate: boolean = false
+) {
+  const incompleteTasks = tasks.filter((t) => t.status !== "COMPLETED");
+  const completedTasks = tasks.filter((t) => t.status === "COMPLETED");
+
+  const renderTaskItem = (task: Task, isCompleted: boolean) => (
+    <li
+      key={task.id}
+      className={`flex items-start gap-2 border-l-2 pl-2 text-black ${borderColor} ${
+        isCompleted ? "opacity-60" : ""
+      }`}
+    >
+      <div className="flex justify-between w-full">
+        <div>
+          <p className={`font-medium ${isCompleted ? "line-through" : ""}`}>
+            {task.name}
+          </p>
+          <p className="text-xs text-gray-500">{task.project.name}</p>
+        </div>
+
+        {showDueDate && task.due && (
+          <p className="text-xs text-gray-400">
+            {task.due.toLocaleDateString()}
+          </p>
+        )}
+      </div>
+    </li>
+  );
+
+  return (
+    <>
+      {incompleteTasks.map((task) => renderTaskItem(task, false))}
+
+      {completedTasks.length > 0 && (
+        <>
+          <hr className="my-2 border-t border-dashed border-gray-300" />
+          {completedTasks.map((task) => renderTaskItem(task, true))}
+        </>
+      )}
+    </>
   );
 }
