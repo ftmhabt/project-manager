@@ -5,6 +5,7 @@ import { isSameDay, isSameWeek } from "date-fns";
 import { getUserTasks } from "@/app/actions/getUserTasks";
 import GlassPane from "../GlassPane";
 import Card from "../Card";
+import Link from "next/link";
 
 type Task = {
   id: string;
@@ -13,6 +14,7 @@ type Task = {
   status: "NOT_STARTED" | "STARTED" | "COMPLETED";
   project: {
     name: string;
+    id: string;
   };
 };
 
@@ -109,20 +111,22 @@ function renderTaskList(
         isCompleted ? "opacity-60" : ""
       }`}
     >
-      <div className="flex justify-between w-full">
-        <div>
-          <p className={`font-medium ${isCompleted ? "line-through" : ""}`}>
-            {task.name}
-          </p>
-          <p className="text-xs text-gray-500">{task.project.name}</p>
-        </div>
+      <Link href={"project/" + task.project.id}>
+        <div className="flex justify-between w-full">
+          <div>
+            <p className={`font-medium ${isCompleted ? "line-through" : ""}`}>
+              {task.name}
+            </p>
+            <p className="text-xs text-gray-500">{task.project.name}</p>
+          </div>
 
-        {showDueDate && task.due && (
-          <p className="text-xs text-gray-400">
-            {task.due.toLocaleDateString()}
-          </p>
-        )}
-      </div>
+          {showDueDate && task.due && (
+            <p className="text-xs text-gray-400">
+              {task.due.toLocaleDateString()}
+            </p>
+          )}
+        </div>
+      </Link>
     </li>
   );
 
