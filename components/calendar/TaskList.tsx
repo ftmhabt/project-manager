@@ -1,6 +1,7 @@
 import { Task, TASK_STATUS } from "@/app/generated/prisma";
 import GlassPane from "../GlassPane";
 import { format } from "date-fns";
+import Link from "next/link";
 
 export default function TaskList({
   tasks,
@@ -12,22 +13,29 @@ export default function TaskList({
   if (!selectedDay) return null;
 
   if (tasks.length === 0) {
-    return <p className="text-gray-500">No items active on this day.</p>;
+    return <p className="text-gray-500">No tasks active on this day.</p>;
   }
 
   return (
     <ul className="mt-4 space-y-2">
       {tasks.map((task) => (
         <li key={task.id}>
-          <GlassPane className="p-3 rounded-2xl text-purple-300">
-            <div
+          <GlassPane className="p-3 rounded-2xl text-black">
+            <Link
+              href={"project/" + task.projectId}
               className={`font-medium ${
-                task.status === TASK_STATUS.COMPLETED ? "line-through" : ""
+                task.status === TASK_STATUS.COMPLETED
+                  ? "line-through opacity-60"
+                  : ""
               }`}
             >
               {task.name}
-            </div>
-            <div className="text-sm">
+            </Link>
+            <div
+              className={`text-sm ${
+                task.status === TASK_STATUS.COMPLETED ? "opacity-60" : ""
+              }`}
+            >
               {format(task.createdAt, "PPP")} → {format(task.due!, "PPP")}
             </div>
           </GlassPane>
