@@ -6,6 +6,7 @@ import LogoutButton from "@/components/user/LogoutButton";
 import TaskStatusChart from "@/components/user/TaskStatusChart";
 import Card from "@/components/Card";
 import GlassPane from "@/components/GlassPane";
+import { Edit, FolderPlus, PlusSquare } from "react-feather";
 
 export default async function Page() {
   const user = await getUserFromCookie();
@@ -102,26 +103,37 @@ export default async function Page() {
       <GlassPane className="text-xl font-medium mb-2 rounded-3xl">
         <h1 className="p-2 px-8">Recent Activity</h1>
         <Card>
-          <ul className="space-y-2 text-sm text-gray-700">
+          <ul className="space-y-2 text-sm text-gray-700 flex flex-col gap-3">
             {sortedActivities.slice(0, 10).map((item) => (
-              <li key={`${item.type}-${item.id}`}>
+              <li key={`${item.type}-${item.id}`} className="font-medium">
                 {item.type === "project-created" && (
-                  <>
-                    📁 <strong>{item.name}</strong> — <em>Project created</em>{" "}
-                    on {format(item.date, "PPP")}
-                  </>
+                  <div>
+                    <FolderPlus
+                      color="#8b5cf6"
+                      size={15}
+                      className="inline-block"
+                    />{" "}
+                    <strong>{item.name}</strong> — <em>Project created</em> on{" "}
+                    {format(item.date, "PPP")}
+                  </div>
                 )}
                 {item.type === "task-created" && (
-                  <>
-                    📝 <strong>{item.name}</strong> — <em>Task created</em> on{" "}
+                  <div>
+                    <PlusSquare
+                      color="#8b5cf6"
+                      size={15}
+                      className="inline-block"
+                    />{" "}
+                    <strong>{item.name}</strong> — <em>Task created</em> on{" "}
                     {format(item.date, "PPP")}
-                  </>
+                  </div>
                 )}
                 {item.type === "task-updated" && (
-                  <>
-                    🔄 <strong>{item.name}</strong> — <em>Status changed to</em>{" "}
+                  <div>
+                    <Edit color="#8b5cf6" size={15} className="inline-block" />{" "}
+                    <strong>{item.name}</strong> — <em>Status changed to</em>{" "}
                     <code>{item.status}</code> on {format(item.date, "PPP")}
-                  </>
+                  </div>
                 )}
               </li>
             ))}
@@ -134,9 +146,35 @@ export default async function Page() {
 
 function StatCard({ label, value }: { label: string; value: number }) {
   return (
-    <Card className="flex flex-col items-center justify-center p-4">
-      <div className="text-3xl font-bold text-black">{value}</div>
-      <div className="text-2xl text-gray-500">{label}</div>
+    <Card className="flex flex-col items-center justify-center p-4 relative">
+      {label === "Tasks" ? (
+        <svg
+          fill="hsla(317, 89%, 70%, 1)"
+          className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  w-2/3 sm:w-1/2 hidden sm:block"
+          width="300px"
+          height="300px"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          id="file"
+        >
+          <path d="M19.41,7,15,2.59A2,2,0,0,0,13.59,2H6A2,2,0,0,0,4,4V20a2,2,0,0,0,2,2H18a2,2,0,0,0,2-2V8.41A2,2,0,0,0,19.41,7Z"></path>
+        </svg>
+      ) : (
+        <svg
+          fill="#8b5cf6"
+          className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  w-2/3 sm:w-1/2 hidden sm:block"
+          width="300px"
+          height="300px"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          id="folder"
+        >
+          <path d="M20,6H13.41L11,3.59A2,2,0,0,0,9.59,3H4A2,2,0,0,0,2,5V19a2,2,0,0,0,2,2H20a2,2,0,0,0,2-2V8A2,2,0,0,0,20,6Z"></path>
+        </svg>
+      )}
+
+      <div className="text-3xl font-bold text-black sm:text-white">{value}</div>
+      <div className="text-2xl text-gray-500 sm:text-white">{label}</div>
     </Card>
   );
 }
