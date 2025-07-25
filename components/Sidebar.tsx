@@ -4,7 +4,7 @@ import SidebarLink, { LinkItem } from "./SidebarLink";
 const links: LinkItem[] = [
   { id: 1, label: "Home", icon: "Grid", link: "/home" },
   { id: 2, label: "Calendar", icon: "Calendar", link: "/calendar" },
-  { id: 3, label: "Profile", icon: "User", link: "#" },
+  { id: 3, label: "Profile", icon: "User", link: "/user" },
   { id: 4, label: "Setting", icon: "Settings", link: "#" },
 ];
 
