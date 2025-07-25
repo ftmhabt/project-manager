@@ -1,7 +1,11 @@
 import { useMemo } from "react";
-import { Task, TASK_STATUS } from "@/app/generated/prisma";
+import { TASK_STATUS } from "@/app/generated/prisma";
+import { TasksWithProject } from "@/app/actions/getUserTasks";
 
-export function useVisibleItems(tasks: Task[], showCompleted: boolean) {
+export function useVisibleItems(
+  tasks: TasksWithProject,
+  showCompleted: boolean
+) {
   return useMemo(() => {
     return tasks.filter(
       (task) => showCompleted || task.status !== TASK_STATUS.COMPLETED

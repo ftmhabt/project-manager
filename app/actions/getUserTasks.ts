@@ -21,3 +21,5 @@ export async function getUserTasks() {
 
   return tasks;
 }
+
+export type TasksWithProject = Awaited<ReturnType<typeof getUserTasks>>;

@@ -1,8 +1,8 @@
 import { useMemo } from "react";
-import { Task } from "@/app/generated/prisma";
 import { isBetween } from "@/lib/dateHelpers";
+import { TasksWithProject } from "@/app/actions/getUserTasks";
 
-export function useActiveItems(tasks: Task[], selectedDay?: Date) {
+export function useActiveItems(tasks: TasksWithProject, selectedDay?: Date) {
   return useMemo(() => {
     if (!selectedDay) return [];
     return tasks.filter(

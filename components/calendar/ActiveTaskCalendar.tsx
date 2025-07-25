@@ -4,7 +4,6 @@ import { useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { format } from "date-fns";
-import { Task } from "@/app/generated/prisma";
 
 import { useOccupiedDates } from "@/hooks/useOccupiedDates";
 import { useActiveItems } from "@/hooks/useActiveItems";
@@ -16,8 +15,13 @@ import ToggleCompletedButton from "./ToggleCompletedButton";
 import styles from "@/styles/ActiveItemCalendar.module.scss";
 import Newtask from "../NewTask";
 import Agenda from "./Agenda";
+import { TasksWithProject } from "@/app/actions/getUserTasks";
 
-export default function ActiveItemCalendar({ tasks }: { tasks: Task[] }) {
+export default function ActiveItemCalendar({
+  tasks,
+}: {
+  tasks: TasksWithProject;
+}) {
   const [selectedDay, setSelectedDay] = useState<Date>(new Date());
   const [showCompleted, setShowCompleted] = useState(true);
 
@@ -47,7 +51,7 @@ export default function ActiveItemCalendar({ tasks }: { tasks: Task[] }) {
           />
         </div>
         <div className="flex-1 overflow-hidden">
-          <Agenda selectedDate={selectedDay} />
+          <Agenda tasks={visibleItems} selectedDate={selectedDay} />
         </div>
       </Card>
       <Card className="w-full h-full flex-1">
