@@ -20,9 +20,9 @@ const CustomLegend = (props: LegendProps) => {
   const { payload } = props;
 
   return (
-    <ul className="text-xs mt-2">
+    <ul className="text-xs mt-2 flex sm:flex-col justify-evenly w-full">
       {payload?.map((entry, index) => (
-        <li key={`item-${index}`} className="flex items-center gap-2">
+        <li key={`item-${index}`} className="flex items-center gap-1 sm:gap-2">
           <span
             className="inline-block w-3 h-3 rounded-full"
             style={{ backgroundColor: entry.color }}
@@ -70,21 +70,21 @@ export default function TaskStatusChart({
   notStarted: number;
 }) {
   const data = [
-    { name: "Completed", value: completed },
+    { name: "Done", value: completed },
     { name: "In Progress", value: started },
     { name: "Not Started", value: notStarted },
   ];
 
   return (
-    <Card className="w-full p-4">
+    <Card className="w-full p-4 col-span-2 sm:col-span-1">
       <ResponsiveContainer width="100%" height={250}>
         <PieChart>
           <Pie
             data={data}
             cx="50%"
             cy="50%"
-            innerRadius={40}
-            outerRadius={60}
+            innerRadius={50}
+            outerRadius={70}
             fill="#8884d8"
             stroke="transparent"
             paddingAngle={5}

@@ -71,7 +71,7 @@ export default async function Page() {
   return (
     <div className="h-full overflow-y-auto pr-3 md:pr-3 w-full flex flex-col gap-3">
       {/* Profile Section */}
-      <Card className="flex justify-between">
+      <Card className="flex flex-col sm:flex-row justify-between gap-3">
         <div>
           <h1 className="text-2xl font-semibold text-black capitalize">
             {fullUser?.firstName} {fullUser?.lastName}
@@ -88,7 +88,7 @@ export default async function Page() {
       </Card>
 
       {/* Quick Stats */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         <StatCard label="Projects" value={totalProjects} />
         <StatCard label="Tasks" value={totalTasks} />
         <TaskStatusChart
