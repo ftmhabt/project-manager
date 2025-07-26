@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ["bcrypt"],
+  // serverExternalPackages: ["bcrypt"],
   typescript: {
     ignoreBuildErrors: true,
   },

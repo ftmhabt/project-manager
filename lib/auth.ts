@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { jwtVerify, SignJWT } from "jose";
 import { db } from "./db";
 import { cookies } from "next/headers";
