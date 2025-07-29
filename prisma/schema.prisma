@@ -9,15 +9,16 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(uuid())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  email     String    @unique
-  firstName String
-  lastName  String
-  password  String
-  projects  Project[]
-  tasks     Task[]
+  id         String       @id @default(uuid())
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  email      String       @unique
+  firstName  String
+  lastName   String
+  password   String
+  projects   Project[]
+  tasks      Task[]
+  TeamMember TeamMember[]
 }
 
 model Project {
@@ -25,15 +26,21 @@ model Project {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   name        String
-  ownerId     String
   description String?
   due         DateTime?
   deleted     Boolean   @default(false)
-  owner       User      @relation(fields: [ownerId], references: [id])
   tasks       Task[]
 
+  ownerId String?
+  owner   User?   @relation(fields: [ownerId], references: [id])
+
+  teamId String?
+  team   Team?   @relation(fields: [teamId], references: [id])
+
   @@unique([ownerId, name])
-  @@index([ownerId, id])
+  @@unique([teamId, name])
+  @@index([ownerId])
+  @@index([teamId])
 }
 
 model Task {
@@ -57,4 +64,31 @@ enum TASK_STATUS {
   NOT_STARTED
   STARTED
   COMPLETED
+}
+
+enum MEMBER_ROLE {
+  OWNER
+  MEMBER
+}
+
+model Team {
+  id         String       @id @default(uuid())
+  name       String
+  inviteCode String       @unique
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  createdBy  String
+  members    TeamMember[]
+  projects   Project[]
+}
+
+model TeamMember {
+  id     String      @id @default(uuid())
+  teamId String
+  userId String
+  role   MEMBER_ROLE
+  team   Team        @relation(fields: [teamId], references: [id])
+  user   User        @relation(fields: [userId], references: [id])
+
+  @@unique([teamId, userId])
 }
