@@ -3,9 +3,9 @@
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Calendar, Grid, Settings, User } from "react-feather";
+import { Calendar, Grid, User, Users } from "react-feather";
 
-const icons = { Settings, User, Grid, Calendar };
+const icons = { Users, User, Grid, Calendar };
 
 type IconName = keyof typeof icons;
 
