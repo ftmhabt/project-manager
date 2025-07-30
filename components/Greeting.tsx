@@ -23,7 +23,7 @@ const Greeting = async () => {
 
       <Link
         href="/calendar"
-        className="block w-1/3 rounded-3xl font-bold hover:scale-110 active:scale-100 transition duration-200 ease-in-out bg-violet-500 text-white border-transparent hover:bg-violet-600 text-xlg py-4 px-8"
+        className="block w-fit rounded-3xl font-bold hover:scale-110 active:scale-100 transition duration-200 ease-in-out bg-violet-500 text-white border-transparent hover:bg-violet-600 text-xlg py-4 px-8"
       >
         {/* eslint-disable-next-line react/no-unescaped-entities*/}
         Today's Schedule
