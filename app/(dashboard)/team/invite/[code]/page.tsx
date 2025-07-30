@@ -1,7 +1,5 @@
-import {
-  getTeamByInviteCodeAction,
-  joinTeamAction,
-} from "@/app/actions/inviteTeam";
+import { getTeamByInviteCodeAction } from "@/app/features/team/actions/inviteTeam";
+import Invite from "@/app/features/team/components/Invite";
 
 export default async function InvitePage({
   params,
@@ -12,23 +10,11 @@ export default async function InvitePage({
 
   if (!team) return <p>Invalid invite link.</p>;
 
-  async function handleJoin() {
-    "use server";
-    try {
-      await joinTeamAction(params.code);
-    } catch (error) {
-      console.error("Error joining team:", error);
-    }
-
-    // Optionally redirect after join
-  }
-
   return (
     <div>
+      {/* eslint-disable-next-line react/no-unescaped-entities*/}
       <h1>You've been invited to join {team.name}</h1>
-      <form action={handleJoin}>
-        <button type="submit">Accept Invite</button>
-      </form>
+      <Invite inviteCode={params.code} />
     </div>
   );
 }

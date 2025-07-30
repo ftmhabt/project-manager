@@ -1,9 +1,9 @@
 "use client";
 import { FormEvent, useState, useTransition } from "react";
-import Button from "./Button";
-import Input from "./Input";
-import ModalWrapper from "./ModalWrapper";
-import { createTeam } from "@/features/actions/createTeam";
+import Button from "../../../../components/Button";
+import Input from "../../../../components/Input";
+import ModalWrapper from "../../../../components/ModalWrapper";
+import { createTeam } from "@/app/features/team/actions/createTeam";
 
 const NewTeam = () => {
   const [name, setName] = useState("");

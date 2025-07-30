@@ -1,10 +1,23 @@
 import { db } from "@/lib/db";
-import NewTeam from "@/components/NewTeam";
-import Link from "next/link";
-import TeamCard from "@/components/TeamCard";
+import NewTeam from "@/app/features/team/components/NewTeam";
+import TeamCard from "@/app/features/team/components/TeamCard";
 
 export const getData = async () => {
-  const teams = await db.team.findMany();
+  const teams = await db.team.findMany({
+    include: {
+      projects: {
+        include: {
+          tasks: true,
+        },
+      },
+      members: {
+        include: {
+          user: true,
+        },
+      },
+    },
+  });
+
   return { teams };
 };
 
@@ -18,9 +31,7 @@ export default async function page() {
           {teams &&
             teams.map((team) => (
               <div className="sm:w-1/3 w-full p-3" key={team.id}>
-                <Link href={`/team/${team.id}`}>
-                  <TeamCard team={team} />
-                </Link>
+                <TeamCard team={team} />
               </div>
             ))}
           <div className="w-1/3 p-3">
