@@ -11,7 +11,7 @@ export default function ToggleCompletedButton({
   onToggle,
 }: Props) {
   return (
-    <GlassPane className="rounded-3xl flex justify-center items-center bg-violet-500  border-transparent hover:bg-violet-600 w-full">
+    <GlassPane className="rounded-3xl flex justify-center items-center border-violet-500 border-2 w-full">
       <ActionButton
         id="toggle"
         label={
@@ -19,7 +19,7 @@ export default function ToggleCompletedButton({
         }
         onClick={onToggle}
         loading={false}
-        textColor="text-white"
+        textColor="text-violet-500 text-sm font-bold"
       />
     </GlassPane>
   );

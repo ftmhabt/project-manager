@@ -16,6 +16,7 @@ import styles from "@/styles/ActiveItemCalendar.module.scss";
 import Newtask from "../NewTask";
 import Agenda from "./Agenda";
 import { TasksWithProject } from "@/app/actions/getUserTasks";
+import Button from "../Button";
 
 export default function ActiveItemCalendar({
   tasks,
@@ -31,7 +32,7 @@ export default function ActiveItemCalendar({
 
   return (
     <div className="sm:flex sm:flex-row flex flex-col gap-3 sm:gap-6 w-full h-full pr-3 overflow-auto">
-      <Card className="p-2 sm:px-8 sm:py-4 flex flex-col gap-2 sm:gap-5 h-full flex-1">
+      <Card className="p-2 sm:px-8 sm:py-4 flex flex-col gap-2 sm:gap-3 h-full flex-1">
         <DayPicker
           mode="single"
           selected={selectedDay}
@@ -43,8 +44,15 @@ export default function ActiveItemCalendar({
           className="w-full min-h-fit text-black"
           required={true}
         />
-        <div className="flex gap-3">
+        <div className="flex gap-3 flex-col sm:flex-row">
           <Newtask selectedDay={selectedDay} />
+          <Button
+            intent="secondary"
+            onClick={() => setSelectedDay(new Date())}
+            className="px-3 py-1 rounded-3xl transition border-violet-500 border-2 text-violet-500 text-sm"
+          >
+            Today
+          </Button>
           <ToggleCompletedButton
             showCompleted={showCompleted}
             onToggle={() => setShowCompleted((prev) => !prev)}

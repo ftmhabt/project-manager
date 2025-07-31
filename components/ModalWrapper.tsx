@@ -7,9 +7,13 @@ Modal.setAppElement("#modal");
 
 const ModalWrapper = ({
   buttonLabel,
+  buttonClassName,
+  buttonIntent,
   children,
 }: {
   buttonLabel: string;
+  buttonClassName?: string;
+  buttonIntent?: "primary" | "secondary";
   children: ReactNode | ((closeModal: () => void) => ReactNode);
 }) => {
   const [isModalOpen, setIsOpen] = useState(false);
@@ -19,7 +23,13 @@ const ModalWrapper = ({
 
   return (
     <>
-      <Button onClick={() => openModal()}>{buttonLabel}</Button>
+      <Button
+        className={buttonClassName}
+        intent={buttonIntent}
+        onClick={() => openModal()}
+      >
+        {buttonLabel}
+      </Button>
 
       <Modal
         isOpen={isModalOpen}

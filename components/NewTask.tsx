@@ -67,10 +67,17 @@ const Newtask = ({
   return (
     <div
       className={` ${
-        selectedDay ? "py-0 w-full" : "py-6 flex  items-center justify-center"
+        selectedDay
+          ? "py-0 w-32 shrink-0"
+          : "py-6 flex  items-center justify-center"
       } hover:scale-105 transition-all ease-in-out duration-200 `}
     >
-      <ModalWrapper buttonLabel="+ New Task">
+      <ModalWrapper
+        buttonLabel="+ New Task"
+        buttonClassName={
+          selectedDay ? "py-1 border-2 border-violet-500 text-sm" : ""
+        }
+      >
         {(closeModal) => (
           <form
             className="flex items-center flex-col gap-3"
