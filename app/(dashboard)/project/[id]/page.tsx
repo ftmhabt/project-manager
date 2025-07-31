@@ -6,8 +6,14 @@ const getData = async (id: string) => {
   const user = await getUserFromCookie();
 
   const project = await db.project.findFirst({
-    where: { id, ownerId: user?.id },
-    include: { tasks: true },
+    where: {
+      id,
+      OR: [
+        { ownerId: user?.id },
+        { team: { members: { some: { userId: user?.id } } } },
+      ],
+    },
+    include: { tasks: true, team: true },
   });
 
   return project;

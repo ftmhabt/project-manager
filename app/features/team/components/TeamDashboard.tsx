@@ -2,6 +2,7 @@
 import { Project, Task, Team, TeamMember, User } from "@/app/generated/prisma";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
+import GlassPane from "@/components/GlassPane";
 import NewProject from "@/components/NewProject";
 import ProjectCard from "@/components/ProjectCard";
 import Link from "next/link";
@@ -43,17 +44,19 @@ export default function TeamDashboard({ team }: { team: TeamWithRelations }) {
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6 flex-1">
         {/* Projects List */}
-        <Card className="col-span-2">
+        <div className="col-span-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 h-fit gap-3 sm:gap-6">
           {team.projects.length > 0 &&
             team.projects.map((project) => (
-              <div className="sm:w-1/3 w-full p-3" key={project.id}>
+              <div className="w-full" key={project.id}>
                 <Link href={`/project/${project.id}`}>
                   <ProjectCard project={project} />
                 </Link>
               </div>
             ))}
-          <NewProject teamId={team.id} />
-        </Card>
+          <GlassPane className="rounded-3xl w-full flex items-center justify-center h-[216px] drop-shadow-xl">
+            <NewProject teamId={team.id} />
+          </GlassPane>
+        </div>
 
         {/* Members List */}
         <Card>

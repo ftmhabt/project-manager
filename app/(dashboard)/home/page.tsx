@@ -11,14 +11,21 @@ import { Suspense } from "react";
 export const getData = async () => {
   const user = await getUserFromCookie();
 
+  if (!user) return { projects: [] };
+
   const projects = await db.project.findMany({
     where: {
-      ownerId: user?.id,
+      OR: [
+        { ownerId: user.id },
+        { team: { members: { some: { userId: user.id } } } },
+      ],
     },
     include: {
       tasks: true,
+      team: true,
     },
   });
+
   return { projects };
 };
 export default async function Page() {

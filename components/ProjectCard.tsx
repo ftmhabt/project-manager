@@ -1,17 +1,11 @@
 import { FC } from "react";
-// import { Prisma } from "@prisma/client";
 import Card from "./Card";
 import clsx from "clsx";
-import { Project, Task } from "@/app/generated/prisma";
+import { Project, Task, Team } from "@/app/generated/prisma";
 
-// const projectWithTasks = Prisma.validator<Prisma.ProjectArgs>()({
-//   include: { tasks: true },
-// });
-
-// type ProjectWithTasks = Prisma.ProjectGetPayload<typeof projectWithTasks>;
-
-type ProjectWithTasks = Project & {
+type ProjectWithTasksAndTeam = Project & {
   tasks: Task[];
+  team?: Team | null;
 };
 
 const formatDate = (date) =>
@@ -22,7 +16,7 @@ const formatDate = (date) =>
     day: "numeric",
   });
 
-const ProjectCard: FC<{ project: ProjectWithTasks }> = ({ project }) => {
+const ProjectCard: FC<{ project: ProjectWithTasksAndTeam }> = ({ project }) => {
   const completedCount = project.tasks.filter(
     (t) => t.status === "COMPLETED"
   ).length;
@@ -31,10 +25,15 @@ const ProjectCard: FC<{ project: ProjectWithTasks }> = ({ project }) => {
 
   return (
     <Card className="px-6 py-8 hover:scale-105 transition-all ease-in-out duration-200">
-      <div>
+      <div className="flex justify-between items-center">
         <span className="text-sm text-gray-300">
           {formatDate(project.createdAt)}
         </span>
+        {project.team && (
+          <span className="text-xs text-violet-500">
+            Team: {project.team.name}
+          </span>
+        )}
       </div>
       <div className="mb-6">
         <span className="text-3xl text-gray-600">{project.name}</span>
