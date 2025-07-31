@@ -5,7 +5,7 @@ import Input from "./Input";
 import { createNewProject } from "@/app/actions/createNewProject";
 import ModalWrapper from "./ModalWrapper";
 
-const NewProject = () => {
+const NewProject = ({ teamId }: { teamId?: string }) => {
   const [name, setName] = useState("");
   const [isPending, startTransition] = useTransition();
 
@@ -16,7 +16,7 @@ const NewProject = () => {
     e.preventDefault();
     startTransition(async () => {
       try {
-        await createNewProject(name);
+        await createNewProject(name, teamId);
       } catch (err) {
         console.error("Server action failed:", err);
       } finally {

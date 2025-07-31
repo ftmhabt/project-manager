@@ -1,6 +1,8 @@
 "use client";
 import { Project, Task, Team, TeamMember, User } from "@/app/generated/prisma";
+import Button from "@/components/Button";
 import Card from "@/components/Card";
+import NewProject from "@/components/NewProject";
 import ProjectCard from "@/components/ProjectCard";
 import Link from "next/link";
 import { useState } from "react";
@@ -23,15 +25,15 @@ export default function TeamDashboard({ team }: { team: TeamWithRelations }) {
   return (
     <div className="w-full mx-auto space-y-6 flex flex-col">
       {/* Team Info */}
-      <Card className="hover:scale-105 transition-all ease-in-out duration-200">
+      <Card>
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-3xl text-gray-700 font-semibold">{team.name}</h1>
-          <button
+          <Button
             onClick={copyInvite}
-            className="text-sm bg-violet-500 px-4 py-2 rounded-lg text-white hover:bg-violet-600 transition"
+            className="text-sm bg-violet-500 px-4 py-2 text-white hover:bg-violet-600 hover:scale-105 transition-all ease-in-out duration-200"
           >
             {copied ? "Copied!" : "Copy Invite Link"}
-          </button>
+          </Button>
         </div>
         <p className="text-black">
           Share this link to invite members:{" "}
@@ -42,17 +44,15 @@ export default function TeamDashboard({ team }: { team: TeamWithRelations }) {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6 flex-1">
         {/* Projects List */}
         <Card className="col-span-2">
-          {team.projects.length > 0 ? (
+          {team.projects.length > 0 &&
             team.projects.map((project) => (
               <div className="sm:w-1/3 w-full p-3" key={project.id}>
                 <Link href={`/project/${project.id}`}>
                   <ProjectCard project={project} />
                 </Link>
               </div>
-            ))
-          ) : (
-            <p className="text-black">No projects found.</p>
-          )}
+            ))}
+          <NewProject teamId={team.id} />
         </Card>
 
         {/* Members List */}
