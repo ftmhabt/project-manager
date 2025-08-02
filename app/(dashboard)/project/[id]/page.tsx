@@ -13,7 +13,22 @@ const getData = async (id: string) => {
         { team: { members: { some: { userId: user?.id } } } },
       ],
     },
-    include: { tasks: true, team: true },
+    include: {
+      tasks: {
+        include: {
+          assignedTo: { select: { id: true, firstName: true, lastName: true } },
+        },
+      },
+      team: {
+        include: {
+          members: {
+            include: {
+              user: { select: { id: true, firstName: true, lastName: true } },
+            },
+          },
+        },
+      },
+    },
   });
 
   return project;
@@ -33,6 +48,7 @@ export default async function ProjectPage({
         tasks={project?.tasks || []}
         title={project?.name || "Project"}
         projectId={project?.id}
+        teamMembers={project?.team?.members || []}
       />
     </div>
   );

@@ -3,28 +3,32 @@ import { useState, useEffect, useTransition, FormEvent } from "react";
 import Modal from "react-modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
 import Button from "./Button";
 import Input from "./Input";
 import { createTask } from "@/app/actions/createTask";
 import { getAllProjects } from "@/app/actions/getAllProjects";
 import ModalWrapper from "./ModalWrapper";
+import { TeamMember } from "@/app/generated/prisma";
 
 Modal.setAppElement("#modal");
 
-const Newtask = ({
+const NewTask = ({
   projectId,
   selectedDay,
+  teamMembers,
 }: {
   projectId?: string;
   selectedDay?: Date;
+  teamMembers?: TeamMember[];
 }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState(selectedDay || new Date());
 
   const [projects, setProjects] = useState<{ id: string; name: string }[]>([]);
+
   const [selectedProjectId, setSelectedProjectId] = useState(projectId || "");
+  const [selectedMemberId, setSelectedMemberId] = useState("");
 
   const [isPending, startTransition] = useTransition();
 
@@ -115,6 +119,21 @@ const Newtask = ({
               showTimeSelect
               dateFormat="Pp"
             />
+            {teamMembers && teamMembers.length > 0 && (
+              <select
+                value={selectedMemberId}
+                onChange={(e) => setSelectedMemberId(e.target.value)}
+                className="border-2 border-gray-400 rounded-3xl px-4 py-2 w-60 text-black"
+                disabled={isPending}
+              >
+                <option value="">Assign to member</option>
+                {teamMembers.map((member) => (
+                  <option key={member.userId} value={member.userId}>
+                    {member.userId}
+                  </option>
+                ))}
+              </select>
+            )}
             <Button type="submit">Create</Button>
           </form>
         )}
@@ -123,4 +142,4 @@ const Newtask = ({
   );
 };
 
-export default Newtask;
+export default NewTask;

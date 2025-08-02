@@ -1,7 +1,7 @@
 import { getUserFromCookie } from "@/lib/auth";
 import { db } from "@/lib/db";
 import Card from "./Card";
-import { Task, TASK_STATUS } from "@/app/generated/prisma";
+import { Task, TASK_STATUS, TeamMember } from "@/app/generated/prisma";
 import Newtask from "./NewTask";
 import IsStarted from "./IsStarted";
 import IsChecked from "./IsChecked";
@@ -34,10 +34,12 @@ const TaskCard = async ({
   title,
   tasks,
   projectId,
+  teamMembers,
 }: {
   title?: string;
   tasks?: Task[];
   projectId?: string;
+  teamMembers?: TeamMember[];
 }) => {
   const data = tasks || (await getData());
 
@@ -103,7 +105,7 @@ const TaskCard = async ({
           </span>
         </div>
         <div>
-          <Newtask projectId={projectId} />
+          <Newtask projectId={projectId} teamMembers={teamMembers} />
         </div>
       </Card>
       {renderTaskGroup(notStartedTasks, "To Start")}
