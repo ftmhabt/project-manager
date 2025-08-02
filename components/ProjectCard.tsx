@@ -8,7 +8,7 @@ type ProjectWithTasksAndTeam = Project & {
   team?: Team | null;
 };
 
-const formatDate = (date) =>
+const formatDate = (date: Date) =>
   new Date(date).toLocaleDateString("en-us", {
     weekday: "long",
     year: "numeric",
