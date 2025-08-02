@@ -68,14 +68,14 @@ const Newtask = ({
     <div
       className={` ${
         selectedDay
-          ? "py-0 w-32 shrink-0"
+          ? "py-0 xlg:w-32 shrink-0 w-full"
           : "py-6 flex  items-center justify-center"
       } hover:scale-105 transition-all ease-in-out duration-200 `}
     >
       <ModalWrapper
         buttonLabel="+ New Task"
         buttonClassName={
-          selectedDay ? "py-1 border-2 border-violet-500 text-sm" : ""
+          selectedDay ? "py-1 border-2 border-violet-500 text-sm w-full" : ""
         }
       >
         {(closeModal) => (

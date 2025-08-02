@@ -1,17 +1,25 @@
+import clsx from "clsx";
 import ActionButton from "../ActionButton";
 import GlassPane from "../GlassPane";
 
 interface Props {
+  className?: string;
   showCompleted: boolean;
   onToggle: () => void;
 }
 
 export default function ToggleCompletedButton({
+  className = "",
   showCompleted,
   onToggle,
 }: Props) {
   return (
-    <GlassPane className="rounded-3xl flex justify-center items-center border-violet-500 border-2 w-full">
+    <GlassPane
+      className={clsx(
+        "rounded-3xl flex justify-center items-center border-violet-500 border-2 w-full",
+        className
+      )}
+    >
       <ActionButton
         id="toggle"
         label={

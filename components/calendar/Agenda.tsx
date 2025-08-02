@@ -35,9 +35,11 @@ export default function Agenda({
 
   return (
     <GlassPane className="rounded-3xl sm:p-6 p-2 bg-violet-500 text-white flex flex-col h-full overflow-hidden">
-      <h3 className="text-lg font-semibold pl-3 shrink-0 mb-3">Agenda</h3>
+      <h3 className="text-lg font-semibold pl-3 shrink-0 mb-1 sm:mb-3">
+        Agenda
+      </h3>
 
-      <div className="flex flex-col flex-1 overflow-hidden gap-3">
+      <div className="flex flex-col flex-1 overflow-hidden gap-1 sm:gap-3">
         <div className="text-sm pl-3 shrink-0">
           {todayTasks.length > 0 ? (
             <p>
@@ -62,7 +64,7 @@ export default function Agenda({
           )}
         </div>
         <Card
-          className={`flex gap-4 rounded-2xl flex-1 overflow-hidden p-5 pt-4 text-xs ${
+          className={`flex gap-4 rounded-2xl flex-1 overflow-hidden sm:p-5 sm:pt-4 p-2 text-xs ${
             todayTasks.length === 0 && weekTasks.length === 0 ? "hidden" : ""
           }`}
         >

@@ -44,7 +44,7 @@ export default function ActiveItemCalendar({
           className="w-full min-h-fit text-black"
           required={true}
         />
-        <div className="flex gap-3 flex-col sm:flex-row">
+        <div className="grid grid-cols-1 gap-2 sm:gap-3 xlg:flex">
           <Newtask selectedDay={selectedDay} />
           <Button
             intent="secondary"
@@ -54,6 +54,7 @@ export default function ActiveItemCalendar({
             Today
           </Button>
           <ToggleCompletedButton
+            className="py-1 col-span-2 flex-1"
             showCompleted={showCompleted}
             onToggle={() => setShowCompleted((prev) => !prev)}
           />
