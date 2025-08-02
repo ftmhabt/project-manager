@@ -9,16 +9,17 @@ datasource db {
 }
 
 model User {
-  id         String       @id @default(uuid())
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
-  email      String       @unique
-  firstName  String
-  lastName   String
-  password   String
-  projects   Project[]
-  tasks      Task[]
-  TeamMember TeamMember[]
+  id            String       @id @default(uuid())
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  email         String       @unique
+  firstName     String
+  lastName      String
+  password      String
+  projects      Project[]
+  TeamMember    TeamMember[]
+  tasks         Task[]       @relation("TaskOwner")
+  assignedTasks Task[]       @relation("AssignedTasks")
 }
 
 model Project {
@@ -44,18 +45,21 @@ model Project {
 }
 
 model Task {
-  id          String      @id @default(uuid())
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  name        String
-  ownerId     String
-  projectId   String
-  due         DateTime?
-  deleted     Boolean     @default(false)
-  description String
-  owner       User        @relation(fields: [ownerId], references: [id])
-  project     Project     @relation(fields: [projectId], references: [id])
-  status      TASK_STATUS
+  id           String    @id @default(uuid())
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  name         String
+  ownerId      String
+  projectId    String
+  due          DateTime?
+  deleted      Boolean   @default(false)
+  description  String
+  assignedToId String?
+
+  owner      User        @relation("TaskOwner", fields: [ownerId], references: [id])
+  assignedTo User?       @relation("AssignedTasks", fields: [assignedToId], references: [id])
+  project    Project     @relation(fields: [projectId], references: [id])
+  status     TASK_STATUS
 
   @@index([ownerId])
 }

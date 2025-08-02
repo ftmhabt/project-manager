@@ -4,7 +4,19 @@ import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
-export async function createTask({ name, description, projectId, due }) {
+export async function createTask({
+  name,
+  description,
+  projectId,
+  due,
+  selectedUserId,
+}: {
+  name: string;
+  description: string;
+  projectId: string;
+  due: Date;
+  selectedUserId?: string;
+}) {
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get(process.env.COOKIE_NAME || "");
@@ -18,6 +30,7 @@ export async function createTask({ name, description, projectId, due }) {
         description,
         due,
         status: "NOT_STARTED",
+        assignedToId: selectedUserId || null,
       },
     });
   } catch (error) {
