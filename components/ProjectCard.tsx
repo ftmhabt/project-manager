@@ -21,7 +21,9 @@ const ProjectCard: FC<{ project: ProjectWithTasksAndTeam }> = ({ project }) => {
     (t) => t.status === "COMPLETED"
   ).length;
 
-  const progress = Math.ceil((completedCount / project.tasks.length) * 100);
+  const progress = Math.ceil(
+    (completedCount / project.tasks.length || 0) * 100
+  );
 
   return (
     <Card className="px-6 py-8 hover:scale-105 transition-all ease-in-out duration-200">
