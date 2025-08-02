@@ -23,6 +23,17 @@ export default function TeamDashboard({ team }: { team: TeamWithRelations }) {
     setTimeout(() => setCopied(false), 2000);
   }
 
+  function getMemberProgress(userId: string) {
+    const tasks = team.projects.flatMap((p) =>
+      p.tasks.filter((t) => t.assignedToId === userId)
+    );
+    const completed = tasks.filter((t) => t.status === "COMPLETED").length;
+    const progress =
+      tasks.length > 0 ? Math.round((completed / tasks.length) * 100) : 0;
+
+    return { completed, total: tasks.length, progress };
+  }
+
   return (
     <div className="w-full mx-auto space-y-6 flex flex-col">
       {/* Team Info */}
@@ -64,25 +75,40 @@ export default function TeamDashboard({ team }: { team: TeamWithRelations }) {
             Team Members
           </h2>
           <ul className="space-y-2">
-            {team.members.map((m) => (
-              <li
-                key={m.id}
-                className={`p-3 rounded-lg ${
-                  m.role === "OWNER"
-                    ? "bg-violet-200 text-gray-800"
-                    : "bg-gray-100 text-gray-700"
-                }`}
-              >
-                <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium">
-                    {m.user.firstName} {m.user.lastName}
-                  </span>
-                  <span className="text-xs font-semibold px-2 py-1 rounded-md bg-white shadow-sm">
-                    {m.role}
-                  </span>
-                </div>
-              </li>
-            ))}
+            {team.members.map((m) => {
+              const { completed, total, progress } = getMemberProgress(
+                m.user.id
+              );
+
+              return (
+                <li
+                  key={m.id}
+                  className={`p-3 rounded-lg ${
+                    m.role === "OWNER"
+                      ? "bg-violet-200 text-gray-800"
+                      : "bg-gray-100 text-gray-700"
+                  }`}
+                >
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium">
+                      {m.user.firstName} {m.user.lastName}
+                    </span>
+                    <span className="text-xs font-semibold px-2 py-1 rounded-md bg-white shadow-sm">
+                      {m.role}
+                    </span>
+                  </div>
+                  <div className="w-full h-2 bg-gray-200 rounded-full mt-2">
+                    <div
+                      className="h-2 bg-violet-500 rounded-full transition-all"
+                      style={{ width: `${progress}%` }}
+                    ></div>
+                  </div>
+                  <p className="text-xs mt-1">
+                    {completed}/{total} tasks completed
+                  </p>
+                </li>
+              );
+            })}
           </ul>
         </Card>
       </div>
