@@ -2,13 +2,12 @@ import { getUserFromCookie } from "@/lib/auth";
 import { db } from "@/lib/db";
 import Card from "./Card";
 import { Task, TASK_STATUS, TeamMember } from "@/app/generated/prisma";
-import Newtask from "./NewTask";
 import IsStarted from "./IsStarted";
 import IsChecked from "./IsChecked";
 import DeleteButton from "./DeleteButton";
-import EditTask from "./EditTask";
 import GlassPane from "./GlassPane";
 import { timeLeftUntil } from "@/lib/due";
+import TaskModal from "./TaskModal";
 
 const NUMBERS: number = 10;
 const getData = async () => {
@@ -84,7 +83,11 @@ const TaskCard = async ({
                   <IsStarted task={task} />
                 )}
                 <IsChecked task={task} />
-                <EditTask task={task} />
+                <TaskModal
+                  task={task}
+                  triggerLabel="Edit"
+                  triggerClassName="text-fuchsia-500 border-fuchsia-500"
+                />
                 <DeleteButton task={task} />
               </GlassPane>
             </div>
@@ -105,7 +108,7 @@ const TaskCard = async ({
           </span>
         </div>
         <div>
-          <Newtask projectId={projectId} teamMembers={teamMembers} />
+          <TaskModal projectId={projectId} teamMembers={teamMembers} />
         </div>
       </Card>
       {renderTaskGroup(notStartedTasks, "To Start")}

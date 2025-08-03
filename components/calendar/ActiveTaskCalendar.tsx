@@ -4,19 +4,17 @@ import { useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { format } from "date-fns";
-
 import { useOccupiedDates } from "@/hooks/useOccupiedDates";
 import { useActiveItems } from "@/hooks/useActiveItems";
 import { useVisibleItems } from "@/hooks/useVisibleItems";
-
 import Card from "../Card";
 import TaskList from "./TaskList";
 import ToggleCompletedButton from "./ToggleCompletedButton";
 import styles from "@/styles/ActiveItemCalendar.module.scss";
-import Newtask from "../NewTask";
 import Agenda from "./Agenda";
 import { TasksWithProject } from "@/app/actions/getUserTasks";
 import Button from "../Button";
+import TaskModal from "../TaskModal";
 
 export default function ActiveItemCalendar({
   tasks,
@@ -45,7 +43,7 @@ export default function ActiveItemCalendar({
           required={true}
         />
         <div className="grid grid-cols-1 gap-2 sm:gap-3 xlg:flex">
-          <Newtask selectedDay={selectedDay} />
+          <TaskModal selectedDay={selectedDay} triggerClassName="w-full" />
           <Button
             intent="secondary"
             onClick={() => setSelectedDay(new Date())}

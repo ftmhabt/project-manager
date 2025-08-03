@@ -4,7 +4,7 @@ interface ActionButtonProps {
   textColor?: string;
   loaderColor?: string;
   loading: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export default function ActionButton({

@@ -10,11 +10,13 @@ const ModalWrapper = ({
   buttonClassName,
   buttonIntent,
   children,
+  triggerButton,
 }: {
   buttonLabel: string;
   buttonClassName?: string;
   buttonIntent?: "primary" | "secondary";
   children: ReactNode | ((closeModal: () => void) => ReactNode);
+  triggerButton?: ReactNode;
 }) => {
   const [isModalOpen, setIsOpen] = useState(false);
 
@@ -23,13 +25,17 @@ const ModalWrapper = ({
 
   return (
     <>
-      <Button
-        className={buttonClassName}
-        intent={buttonIntent}
-        onClick={() => openModal()}
-      >
-        {buttonLabel}
-      </Button>
+      {triggerButton ? (
+        <div onClick={openModal}>{triggerButton}</div>
+      ) : (
+        <Button
+          className={buttonClassName}
+          intent={buttonIntent}
+          onClick={() => openModal()}
+        >
+          {buttonLabel}
+        </Button>
+      )}
 
       <Modal
         isOpen={isModalOpen}
