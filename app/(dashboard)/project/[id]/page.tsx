@@ -4,6 +4,9 @@ import { db } from "@/lib/db";
 
 const getData = async (id: string) => {
   const user = await getUserFromCookie();
+  if (!user) {
+    throw new Error("Unauthorized");
+  }
 
   const project = await db.project.findFirst({
     where: {

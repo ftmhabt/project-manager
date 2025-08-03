@@ -2,13 +2,8 @@ import { getUserFromCookie } from "@/lib/auth";
 import Card from "./Card";
 import Link from "next/link";
 
-const getData = async () => {
-  const user = await getUserFromCookie();
-  return user;
-};
-
 const Greeting = async () => {
-  const user = await getData();
+  const user = await getUserFromCookie();
 
   return (
     <Card className="w-full py-4 relative">

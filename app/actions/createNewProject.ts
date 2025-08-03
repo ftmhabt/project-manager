@@ -1,20 +1,15 @@
 "use server";
-import { validateJWT } from "@/lib/auth";
+import { getUserFromCookie } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
-import { cookies } from "next/headers";
 
 export async function createNewProject(name: string, teamId?: string) {
-  const cookieStore = await cookies();
-  const token = cookieStore.get(process.env.COOKIE_NAME || "");
-  if (!token) throw new Error("Not authenticated");
-
-  const user = await validateJWT(token?.value || "");
+  const user = await getUserFromCookie();
 
   // Create personal project
   if (!teamId) {
     const project = await db.project.create({
-      data: { name: name, ownerId: user.id },
+      data: { name: name, ownerId: user?.id },
     });
 
     revalidatePath("/home");
@@ -24,7 +19,7 @@ export async function createNewProject(name: string, teamId?: string) {
 
   // Check if user is in team
   const member = await db.teamMember.findFirst({
-    where: { teamId: teamId, userId: user.id },
+    where: { teamId: teamId, userId: user?.id },
   });
   if (!member) throw new Error("You are not a member of this team");
 

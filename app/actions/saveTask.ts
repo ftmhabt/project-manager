@@ -1,6 +1,6 @@
 "use server";
 
-import { getAuthenticatedUser } from "@/lib/auth";
+import { getUserFromCookie } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 
@@ -14,7 +14,7 @@ interface TaskData {
 }
 
 export async function saveTask(data: TaskData) {
-  const user = await getAuthenticatedUser();
+  const user = await getUserFromCookie();
   if (!user) {
     return new Response("Unauthorized", { status: 401 });
   }

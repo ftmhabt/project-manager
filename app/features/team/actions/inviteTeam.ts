@@ -1,5 +1,5 @@
 "use server";
-import { validateJWT } from "@/lib/auth";
+import { getUserFromCookie, validateJWT } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { redirect } from "next/dist/client/components/navigation";
 import { cookies } from "next/headers";
@@ -12,13 +12,10 @@ export async function getTeamByInviteCodeAction(inviteCode: string) {
 }
 
 export async function joinTeamAction(inviteCode: string) {
-  const cookieStore = await cookies();
-  const token = cookieStore.get(process.env.COOKIE_NAME || "");
-
-  const user = await validateJWT(token?.value || "");
+  const user = await getUserFromCookie();
 
   const dbUser = await db.user.findUnique({
-    where: { id: user.id },
+    where: { id: user?.id },
   });
 
   if (!dbUser) throw new Error("User no longer exists");
@@ -26,7 +23,7 @@ export async function joinTeamAction(inviteCode: string) {
   const team = await db.team.findUnique({ where: { inviteCode } });
   if (!team) throw new Error("Invalid code");
 
-  if (team.createdBy === user.id) {
+  if (team.createdBy === user?.id) {
     throw new Error("You are the owner of this team");
   }
 

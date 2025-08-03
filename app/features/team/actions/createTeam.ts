@@ -1,15 +1,11 @@
 "use server";
-import { validateJWT } from "@/lib/auth";
+import { getUserFromCookie } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
-import { cookies } from "next/headers";
 import { nanoid } from "nanoid";
 
 export async function createTeam(name: string) {
-  const cookieStore = await cookies();
-  const token = cookieStore.get(process.env.COOKIE_NAME || "");
-
-  const user = await validateJWT(token?.value || "");
+  const user = await getUserFromCookie();
   if (!user) throw new Error("Unauthorized");
 
   const inviteCode = nanoid(10);

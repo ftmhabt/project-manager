@@ -1,10 +1,10 @@
 "use server";
 
-import { getAuthenticatedUser } from "@/lib/auth";
+import { getUserFromCookie } from "@/lib/auth";
 import { db } from "@/lib/db";
 
 export const getAllProjects = async () => {
-  const user = await getAuthenticatedUser();
+  const user = await getUserFromCookie();
 
   const projects = await db.project.findMany({
     where: {
