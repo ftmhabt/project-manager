@@ -1,4 +1,4 @@
-import Card from "./Card";
+import Card from "@/components/Card";
 import SidebarLink, { LinkItem } from "./SidebarLink";
 
 const links: LinkItem[] = [

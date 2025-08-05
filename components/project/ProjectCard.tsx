@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Card from "./Card";
+import Card from "../Card";
 import clsx from "clsx";
 import { Project, Task, Team } from "@/app/generated/prisma";
 

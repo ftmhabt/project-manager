@@ -1,9 +1,9 @@
 "use client";
 import { FormEvent, useState, useTransition } from "react";
-import Button from "./Button";
-import Input from "./Input";
-import { createNewProject } from "@/app/actions/createNewProject";
-import ModalWrapper from "./ModalWrapper";
+import Button from "../Button";
+import Input from "../Input";
+import { createNewProject } from "@/app/features/tasks/actions/createNewProject";
+import ModalWrapper from "../ModalWrapper";
 
 const NewProject = ({ teamId }: { teamId?: string }) => {
   const [name, setName] = useState("");

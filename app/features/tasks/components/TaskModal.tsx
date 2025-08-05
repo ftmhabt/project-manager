@@ -3,13 +3,13 @@ import { useEffect, useState, useTransition, FormEvent } from "react";
 import Modal from "react-modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Button from "./Button";
-import Input from "./Input";
-import { getAllProjects } from "@/app/actions/getAllProjects";
-import ModalWrapper from "./ModalWrapper";
+import Button from "../../../../components/Button";
+import Input from "../../../../components/Input";
+import { getAllProjects } from "@/app/features/tasks/actions/getAllProjects";
+import ModalWrapper from "../../../../components/ModalWrapper";
 import { TeamMember, Task } from "@/app/generated/prisma";
-import { saveTask } from "@/app/actions/saveTask";
-import ActionButton from "./ActionButton";
+import { saveTask } from "@/app/features/tasks/actions/saveTask";
+import ActionButton from "../../../../components/ActionButton";
 
 Modal.setAppElement("#modal");
 

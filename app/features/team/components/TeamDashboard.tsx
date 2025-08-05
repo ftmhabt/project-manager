@@ -3,8 +3,8 @@ import { Project, Task, Team, TeamMember, User } from "@/app/generated/prisma";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import GlassPane from "@/components/GlassPane";
-import NewProject from "@/components/NewProject";
-import ProjectCard from "@/components/ProjectCard";
+import NewProject from "@/components/project/NewProject";
+import ProjectCard from "@/components/project/ProjectCard";
 import Link from "next/link";
 import { useState } from "react";
 

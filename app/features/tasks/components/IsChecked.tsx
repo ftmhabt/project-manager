@@ -2,19 +2,21 @@
 
 import React, { useState, useTransition } from "react";
 import { Task, TASK_STATUS } from "@/app/generated/prisma";
-import { updateTaskStatus } from "@/app/actions/changeTaskStatus";
-import ActionButton from "./ActionButton";
+import { updateTaskStatus } from "@/app/features/tasks/actions/changeTaskStatus";
+import ActionButton from "../../../../components/ActionButton";
 
-export default function IsStarted({ task }: { task: Task }) {
-  const [isStarted, setIsStarted] = useState(
-    task.status === TASK_STATUS.STARTED
+export default function IsChecked({ task }: { task: Task }) {
+  const [isChecked, setIsChecked] = useState(
+    task.status === TASK_STATUS.COMPLETED
   );
   const [isPending, startTransition] = useTransition();
 
   const handleToggle = () => {
-    const newStatus = isStarted ? TASK_STATUS.NOT_STARTED : TASK_STATUS.STARTED;
+    const newStatus = isChecked
+      ? TASK_STATUS.NOT_STARTED
+      : TASK_STATUS.COMPLETED;
 
-    setIsStarted(newStatus === TASK_STATUS.STARTED);
+    setIsChecked(newStatus === TASK_STATUS.COMPLETED);
 
     startTransition(async () => {
       try {
@@ -24,7 +26,7 @@ export default function IsStarted({ task }: { task: Task }) {
           status: newStatus,
         });
       } catch (err) {
-        setIsStarted(isStarted);
+        setIsChecked(isChecked);
         console.error("Server action failed:", err);
       }
     });
@@ -33,9 +35,9 @@ export default function IsStarted({ task }: { task: Task }) {
   return (
     <ActionButton
       id={task.id}
-      label={isStarted ? "Started" : "Start"}
-      textColor="text-violet-500"
-      loaderColor="border-violet-500"
+      label={isChecked ? "Checked" : "Check"}
+      textColor="text-indigo-500"
+      loaderColor="border-indigo-500"
       loading={isPending}
       onClick={handleToggle}
     />

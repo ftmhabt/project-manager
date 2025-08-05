@@ -1,11 +1,11 @@
 import { getUserFromCookie } from "@/lib/auth";
 import { db } from "@/lib/db";
-import Card from "./Card";
+import Card from "../../../../components/Card";
 import { Task, TASK_STATUS, TeamMember } from "@/app/generated/prisma";
 import IsStarted from "./IsStarted";
 import IsChecked from "./IsChecked";
 import DeleteButton from "./DeleteButton";
-import GlassPane from "./GlassPane";
+import GlassPane from "../../../../components/GlassPane";
 import { timeLeftUntil } from "@/lib/due";
 import TaskModal from "./TaskModal";
 

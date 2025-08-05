@@ -3,10 +3,10 @@
 import { register, signin } from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
-import Input from "./Input";
-import Card from "./Card";
 import Link from "next/link";
-import Button from "./Button";
+import Card from "@/components/Card";
+import Input from "@/components/Input";
+import Button from "@/components/Button";
 
 const registerContent = {
   linkUrl: "/signin",

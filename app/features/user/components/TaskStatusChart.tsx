@@ -8,7 +8,7 @@ import {
   ResponsiveContainer,
   LegendProps,
 } from "recharts";
-import Card from "../Card";
+import Card from "@/components/Card";
 
 const COLORS = [
   "hsla(337, 92%, 61%, 1)",

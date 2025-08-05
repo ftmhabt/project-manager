@@ -1,8 +1,8 @@
-import Greeting from "@/components/Greeting";
-import GreetingsSkeleton from "@/components/GreetingsSkeleton";
-import NewProject from "@/components/NewProject";
-import ProjectCard from "@/components/ProjectCard";
-import TaskCard from "@/components/TaskCard";
+import Greeting from "@/components/home/Greeting";
+import GreetingsSkeleton from "@/components/home/GreetingsSkeleton";
+import NewProject from "@/components/project/NewProject";
+import ProjectCard from "@/components/project/ProjectCard";
+import TaskCard from "@/app/features/tasks/components/TaskCard";
 import { getUserFromCookie } from "@/lib/auth";
 import { db } from "@/lib/db";
 import Link from "next/link";

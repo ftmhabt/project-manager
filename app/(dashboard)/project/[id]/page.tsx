@@ -1,4 +1,4 @@
-import TaskCard from "@/components/TaskCard";
+import TaskCard from "@/app/features/tasks/components/TaskCard";
 import { getUserFromCookie } from "@/lib/auth";
 import { db } from "@/lib/db";
 

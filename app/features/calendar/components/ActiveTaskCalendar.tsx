@@ -7,14 +7,14 @@ import { format } from "date-fns";
 import { useOccupiedDates } from "@/hooks/useOccupiedDates";
 import { useActiveItems } from "@/hooks/useActiveItems";
 import { useVisibleItems } from "@/hooks/useVisibleItems";
-import Card from "../Card";
+import Card from "../../../../components/Card";
 import TaskList from "./TaskList";
-import ToggleCompletedButton from "./ToggleCompletedButton";
 import styles from "@/styles/ActiveItemCalendar.module.scss";
 import Agenda from "./Agenda";
-import { TasksWithProject } from "@/app/actions/getUserTasks";
-import Button from "../Button";
-import TaskModal from "../TaskModal";
+import { TasksWithProject } from "@/app/features/tasks/actions/getUserTasks";
+import Button from "../../../../components/Button";
+import TaskModal from "../../tasks/components/TaskModal";
+import ToggleCompletedButton from "./ToggleCompletedButton";
 
 export default function ActiveItemCalendar({
   tasks,

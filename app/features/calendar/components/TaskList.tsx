@@ -1,5 +1,5 @@
 import { Task, TASK_STATUS } from "@/app/generated/prisma";
-import GlassPane from "../GlassPane";
+import GlassPane from "../../../../components/GlassPane";
 import { format } from "date-fns";
 import Link from "next/link";
 

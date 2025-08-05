@@ -2,8 +2,8 @@
 
 import { useTransition } from "react";
 import { Task } from "@/app/generated/prisma";
-import { deleteTask } from "@/app/actions/deleteTask";
-import ActionButton from "./ActionButton";
+import { deleteTask } from "@/app/features/tasks/actions/deleteTask";
+import ActionButton from "../../../../components/ActionButton";
 
 export default function DeleteButton({ task }: { task: Task }) {
   const [isPending, startTransition] = useTransition();

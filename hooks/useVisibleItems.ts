@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { TASK_STATUS } from "@/app/generated/prisma";
-import { TasksWithProject } from "@/app/actions/getUserTasks";
+import { TasksWithProject } from "@/app/features/tasks/actions/getUserTasks";
 
 export function useVisibleItems(
   tasks: TasksWithProject,

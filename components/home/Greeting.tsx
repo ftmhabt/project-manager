@@ -1,5 +1,5 @@
 import { getUserFromCookie } from "@/lib/auth";
-import Card from "./Card";
+import Card from "../Card";
 import Link from "next/link";
 
 const Greeting = async () => {
