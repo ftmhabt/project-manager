@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { joinTeamAction } from "@/app/features/team/actions/inviteTeam";
+import Button from "@/components/Button";
 
 export default function Invite({ inviteCode }: { inviteCode: string }) {
   const [error, setError] = useState("");
@@ -18,9 +19,9 @@ export default function Invite({ inviteCode }: { inviteCode: string }) {
   }
 
   return (
-    <div>
-      <button onClick={handleJoin}>Accept Invite</button>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+    <div className="flex flex-col justify-center items-center gap-2">
+      <Button onClick={handleJoin}>Accept Invite</Button>
+      {error && <p className="text-red-500">{error}</p>}
     </div>
   );
 }

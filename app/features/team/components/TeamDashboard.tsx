@@ -14,7 +14,7 @@ type TeamWithRelations = Team & {
 };
 
 export default function TeamDashboard({ team }: { team: TeamWithRelations }) {
-  const inviteUrl = `${process.env.NEXT_PUBLIC_APP_URL}/team/invite/${team.inviteCode}`;
+  const inviteUrl = `${process.env.NEXT_PUBLIC_APP_URL}/invite/${team.inviteCode}`;
   const [copied, setCopied] = useState(false);
 
   function copyInvite() {
