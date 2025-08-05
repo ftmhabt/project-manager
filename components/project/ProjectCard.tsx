@@ -26,7 +26,7 @@ const ProjectCard: FC<{ project: ProjectWithTasksAndTeam }> = ({ project }) => {
   );
 
   return (
-    <Card className="px-6 py-8 hover:scale-105 transition-all ease-in-out duration-200">
+    <Card className="px-6 py-8 hover:scale-105 transition-all ease-in-out duration-200 h-full flex flex-col">
       <div className="flex justify-between items-center">
         <span className="text-sm text-gray-300">
           {formatDate(project.createdAt)}
@@ -37,7 +37,7 @@ const ProjectCard: FC<{ project: ProjectWithTasksAndTeam }> = ({ project }) => {
           </span>
         )}
       </div>
-      <div className="mb-6">
+      <div className="mb-6 flex-1">
         <span className="text-3xl text-gray-600">{project.name}</span>
       </div>
       <div className="mb-2">

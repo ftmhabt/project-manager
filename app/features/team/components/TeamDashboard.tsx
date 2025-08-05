@@ -53,7 +53,7 @@ export default function TeamDashboard({ team }: { team: TeamWithRelations }) {
         </p>
       </Card>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6 flex-1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 flex-1">
         {/* Projects List */}
         <div className="col-span-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 h-fit gap-3 sm:gap-6">
           {team.projects.length > 0 &&
@@ -64,7 +64,7 @@ export default function TeamDashboard({ team }: { team: TeamWithRelations }) {
                 </Link>
               </div>
             ))}
-          <GlassPane className="rounded-3xl w-full flex items-center justify-center h-[216px] drop-shadow-xl">
+          <GlassPane className="rounded-3xl w-full flex items-center justify-center h-full drop-shadow-xl">
             <NewProject teamId={team.id} />
           </GlassPane>
         </div>

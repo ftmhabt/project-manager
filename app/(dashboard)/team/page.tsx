@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import NewTeam from "@/app/features/team/components/NewTeam";
 import TeamCard from "@/app/features/team/components/TeamCard";
+import GlassPane from "@/components/GlassPane";
 
 export const getData = async () => {
   const teams = await db.team.findMany({
@@ -27,15 +28,17 @@ export default async function page() {
   return (
     <div className="h-full overflow-y-auto pr-3 md:pr-3 w-full">
       <div className="h-full items-stretch justify-center min-h-[content]">
-        <div className="flex flex-2 grow items-center flex-wrap flex-col sm:flex-row mt-3 -m-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grow items-center flex-wrap flex-col sm:flex-row mt-3 -m-3">
           {teams &&
             teams.map((team) => (
-              <div className="sm:w-1/3 w-full p-3" key={team.id}>
+              <div className="w-full p-3" key={team.id}>
                 <TeamCard team={team} />
               </div>
             ))}
-          <div className="w-1/3 p-3">
-            <NewTeam />
+          <div className="w-full p-3 h-full">
+            <GlassPane className="rounded-3xl w-full flex items-center justify-center h-full drop-shadow-xl">
+              <NewTeam />
+            </GlassPane>
           </div>
         </div>
       </div>

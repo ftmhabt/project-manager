@@ -7,6 +7,7 @@ import { getUserFromCookie } from "@/lib/auth";
 import { db } from "@/lib/db";
 import Link from "next/link";
 import { Suspense } from "react";
+import GlassPane from "@/components/GlassPane";
 
 export const getData = async () => {
   const user = await getUserFromCookie();
@@ -38,16 +39,18 @@ export default async function Page() {
             <Greeting />
           </Suspense>
         </div>
-        <div className="flex flex-2 grow items-center flex-wrap flex-col sm:flex-row mt-3 -m-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 flex-2 mt-3 -m-3">
           {projects.map((project) => (
-            <div className="sm:w-1/3 w-full p-3" key={project.id}>
+            <div className="w-full p-3" key={project.id}>
               <Link href={`/project/${project.id}`}>
                 <ProjectCard project={project} />
               </Link>
             </div>
           ))}
-          <div className="w-1/3 p-3">
-            <NewProject />
+          <div className="w-full p-3">
+            <GlassPane className="rounded-3xl w-full flex items-center justify-center h-full drop-shadow-xl">
+              <NewProject />
+            </GlassPane>
           </div>
         </div>
         <div className="mt-6 flex-2 grow w-full flex">

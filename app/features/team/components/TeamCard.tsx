@@ -18,15 +18,15 @@ const TeamCard = ({ team }: { team: TeamWithRelations }) => {
     0
   );
   return (
-    <Card className="px-6 py-8 hover:scale-105 transition-all ease-in-out duration-200">
-      <div className="mb-4 flex justify-between items-center">
+    <Card className="px-6 py-8 hover:scale-105 transition-all ease-in-out duration-200 flex flex-col">
+      <div className="mb-4 flex justify-between items-start flex-1">
         <Link href={`/team/${team.id}`}>
           <span className="text-3xl text-gray-600">{team.name}</span>
         </Link>
         <div className="relative">
           <button
             onClick={() => setOpen((p) => !p)}
-            className="text-sm bg-violet-500 px-3 py-1 rounded-lg"
+            className="text-sm bg-violet-500 px-3 py-1 rounded-lg text-nowrap"
           >
             Members ▼
           </button>
