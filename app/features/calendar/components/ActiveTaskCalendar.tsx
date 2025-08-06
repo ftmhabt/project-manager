@@ -24,10 +24,9 @@ export default function ActiveItemCalendar({
   const [selectedDay, setSelectedDay] = useState<Date>(new Date());
   const [showCompleted, setShowCompleted] = useState(true);
 
-  const occupiedDates = useOccupiedDates(tasks, showCompleted);
   const activeItems = useActiveItems(tasks, selectedDay);
+  const occupiedDates = useOccupiedDates(tasks, showCompleted);
   const visibleItems = useVisibleItems(activeItems, showCompleted);
-
   return (
     <div className="sm:flex sm:flex-row flex flex-col gap-3 sm:gap-6 w-full h-full pr-3 overflow-auto">
       <Card className="p-2 sm:px-8 sm:py-4 flex flex-col gap-2 sm:gap-3 h-full flex-1">
@@ -42,6 +41,7 @@ export default function ActiveItemCalendar({
           className="w-full min-h-fit text-black"
           required={true}
         />
+
         <div className="grid grid-cols-1 gap-2 sm:gap-3 xlg:flex">
           <TaskModal selectedDay={selectedDay} triggerClassName="w-full" />
           <Button
@@ -61,8 +61,8 @@ export default function ActiveItemCalendar({
           <Agenda tasks={visibleItems} selectedDate={selectedDay} />
         </div>
       </Card>
-      <Card className="w-full h-full flex-1">
-        <div className="flex-1">
+      <Card className="w-full h-full flex-1 flex">
+        <div className="flex-1 overflow-y-auto">
           <h2 className="text-lg font-semibold text-black">
             {selectedDay
               ? `Tasks active on ${format(selectedDay, "PPP")}`

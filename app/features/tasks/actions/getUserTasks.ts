@@ -5,13 +5,25 @@ import { db } from "@/lib/db";
 
 export async function getUserTasks() {
   const user = await getUserFromCookie();
+  if (!user) return [];
+
   const tasks = await db.task.findMany({
     where: {
-      ownerId: user?.id,
       deleted: false,
+      OR: [{ ownerId: user.id }, { assignedToId: user.id }],
     },
     include: {
-      project: true,
+      project: {
+        include: {
+          team: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      },
+      assignedTo: true,
+      owner: true,
     },
   });
 
