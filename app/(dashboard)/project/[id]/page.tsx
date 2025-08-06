@@ -52,6 +52,7 @@ export default async function ProjectPage({
         title={project?.name || "Project"}
         projectId={project?.id}
         teamMembers={project?.team?.members || []}
+        teamOwnerId={project?.team?.createdBy || ""}
       />
     </div>
   );

@@ -37,11 +37,13 @@ const TaskCard = async ({
   tasks,
   projectId,
   teamMembers,
+  teamOwnerId,
 }: {
   title?: string;
   tasks?: TaskWithOptionalAssigned[];
   projectId?: string;
   teamMembers?: TeamMember[];
+  teamOwnerId?: string;
 }) => {
   const data = tasks || (await getData());
 
@@ -55,6 +57,7 @@ const TaskCard = async ({
     (task) => task.status === TASK_STATUS.COMPLETED
   );
 
+  const currentUserId = await getUserFromCookie();
   const renderTaskGroup = (
     tasks: TaskWithOptionalAssigned[],
     heading: string
@@ -66,44 +69,56 @@ const TaskCard = async ({
 
       <Card className="flex justify-between flex-col gap-10">
         {tasks.length ? (
-          tasks.map((task) => (
-            <div
-              key={task.id}
-              className="flex md:flex-row flex-col gap-2 w-full"
-            >
-              <div className="py-2 w-full">
-                <div>
-                  <span className="text-2xl text-gray-700 ">{task.name}</span>
-                  {task.assignedTo && (
-                    <span className="text-sm text-violet-500">
-                      Assigned to: {task.assignedTo.firstName}{" "}
-                      {task.assignedTo.lastName}
+          tasks.map((task) => {
+            const canEdit =
+              currentUserId?.id === task.ownerId ||
+              currentUserId?.id === task.assignedTo?.id ||
+              currentUserId?.id === teamOwnerId;
+
+            return (
+              <div
+                key={task.id}
+                className="flex md:flex-row flex-col gap-2 w-full"
+              >
+                <div className="py-2 w-full">
+                  <div>
+                    <span className="text-2xl text-gray-700 ">{task.name}</span>
+                    {task.assignedTo && (
+                      <span className="text-sm text-violet-500">
+                        Assigned to: {task.assignedTo.firstName}{" "}
+                        {task.assignedTo.lastName}
+                      </span>
+                    )}
+                  </div>
+                  <div className="grid grid-cols-2">
+                    <span className="text-sm text-gray-500">
+                      {task.description}
                     </span>
+                    <span className="text-sm text-gray-500 justify-self-end md:justify-self-auto">
+                      {task.due && timeLeftUntil(task.due)}
+                    </span>
+                  </div>
+                </div>
+
+                <GlassPane
+                  className={`rounded-3xl flex md:gap-3 justify-end flex-wrap md:flex-nowrap sm:mb-0 mb-2 ${
+                    !canEdit ? "opacity-50 pointer-events-none" : ""
+                  }`}
+                >
+                  {task.status !== TASK_STATUS.COMPLETED && (
+                    <IsStarted task={task} />
                   )}
-                </div>
-                <div className="grid grid-cols-2">
-                  <span className="text-sm text-gray-500">
-                    {task.description}
-                  </span>
-                  <span className="text-sm text-gray-500 justify-self-end md:justify-self-auto">
-                    {task.due && timeLeftUntil(task.due)}
-                  </span>
-                </div>
+                  <IsChecked task={task} />
+                  <TaskModal
+                    task={task}
+                    triggerLabel="Edit"
+                    triggerClassName="text-fuchsia-500 border-fuchsia-500"
+                  />
+                  <DeleteButton task={task} />
+                </GlassPane>
               </div>
-              <GlassPane className="rounded-3xl flex md:gap-3 justify-end flex-wrap md:flex-nowrap sm:mb-0 mb-2">
-                {task.status !== TASK_STATUS.COMPLETED && (
-                  <IsStarted task={task} />
-                )}
-                <IsChecked task={task} />
-                <TaskModal
-                  task={task}
-                  triggerLabel="Edit"
-                  triggerClassName="text-fuchsia-500 border-fuchsia-500"
-                />
-                <DeleteButton task={task} />
-              </GlassPane>
-            </div>
-          ))
+            );
+          })
         ) : (
           <div className="text-gray-400 italic">No tasks</div>
         )}
