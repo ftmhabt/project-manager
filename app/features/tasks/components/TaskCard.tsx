@@ -1,14 +1,17 @@
 import { getUserFromCookie } from "@/lib/auth";
 import { db } from "@/lib/db";
-import Card from "../../../../components/Card";
-import { Task, TASK_STATUS, TeamMember } from "@/app/generated/prisma";
+import Card from "@/components/Card";
+import { Task, User, TASK_STATUS, TeamMember } from "@/app/generated/prisma";
 import IsStarted from "./IsStarted";
 import IsChecked from "./IsChecked";
 import DeleteButton from "./DeleteButton";
-import GlassPane from "../../../../components/GlassPane";
+import GlassPane from "@/components/GlassPane";
 import { timeLeftUntil } from "@/lib/due";
 import TaskModal from "./TaskModal";
 
+export type TaskWithOptionalAssigned = Task & {
+  assignedTo?: Pick<User, "id" | "firstName" | "lastName"> | null;
+};
 const NUMBERS: number = 10;
 const getData = async () => {
   const user = await getUserFromCookie();
@@ -36,7 +39,7 @@ const TaskCard = async ({
   teamMembers,
 }: {
   title?: string;
-  tasks?: Task[];
+  tasks?: TaskWithOptionalAssigned[];
   projectId?: string;
   teamMembers?: TeamMember[];
 }) => {
@@ -52,7 +55,10 @@ const TaskCard = async ({
     (task) => task.status === TASK_STATUS.COMPLETED
   );
 
-  const renderTaskGroup = (tasks: Task[], heading: string) => (
+  const renderTaskGroup = (
+    tasks: TaskWithOptionalAssigned[],
+    heading: string
+  ) => (
     <GlassPane className="mt-6 rounded-3xl">
       <div className={`text-xl font-semibold text-white p-3 px-8 mb-2 `}>
         {heading}
@@ -68,6 +74,12 @@ const TaskCard = async ({
               <div className="py-2 w-full">
                 <div>
                   <span className="text-2xl text-gray-700 ">{task.name}</span>
+                  {task.assignedTo && (
+                    <span className="text-sm text-violet-500">
+                      Assigned to: {task.assignedTo.firstName}{" "}
+                      {task.assignedTo.lastName}
+                    </span>
+                  )}
                 </div>
                 <div className="grid grid-cols-2">
                   <span className="text-sm text-gray-500">

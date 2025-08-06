@@ -36,7 +36,7 @@ const getData = async (id: string) => {
 
   return project;
 };
-
+export type ProjectWithTasks = Awaited<ReturnType<typeof getData>>;
 export default async function ProjectPage({
   params,
 }: {
@@ -48,7 +48,7 @@ export default async function ProjectPage({
   return (
     <div className="h-full overflow-y-auto pr-3 md:pr-6 w-1/1">
       <TaskCard
-        tasks={project?.tasks || []}
+        tasks={project?.tasks}
         title={project?.name || "Project"}
         projectId={project?.id}
         teamMembers={project?.team?.members || []}
