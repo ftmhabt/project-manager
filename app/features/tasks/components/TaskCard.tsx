@@ -8,44 +8,28 @@ import DeleteButton from "./DeleteButton";
 import GlassPane from "@/components/GlassPane";
 import { timeLeftUntil } from "@/lib/due";
 import TaskModal from "./TaskModal";
+import { getPriortyTasks } from "../actions/getAllProjects";
 
 export type TaskWithOptionalAssigned = Task & {
   assignedTo?: Pick<User, "id" | "firstName" | "lastName"> | null;
 };
-const NUMBERS: number = 10;
-const getData = async () => {
-  const user = await getUserFromCookie();
-  const tasks = await db.task.findMany({
-    where: {
-      ownerId: user?.id,
-      NOT: {
-        status: TASK_STATUS.COMPLETED,
-        deleted: false,
-      },
-    },
-    take: NUMBERS,
-    orderBy: {
-      due: "asc",
-    },
-  });
-
-  return tasks;
-};
 
 const TaskCard = async ({
+  numbers,
   title,
   tasks,
   projectId,
   teamMembers,
   teamOwnerId,
 }: {
+  numbers?: number;
   title?: string;
   tasks?: TaskWithOptionalAssigned[];
   projectId?: string;
   teamMembers?: TeamMember[];
   teamOwnerId?: string;
 }) => {
-  const data = tasks || (await getData());
+  const data = tasks || (await getPriortyTasks(numbers || 10));
 
   const notStartedTasks = data.filter(
     (task) => task.status === TASK_STATUS.NOT_STARTED
@@ -84,9 +68,8 @@ const TaskCard = async ({
                   <div>
                     <span className="text-2xl text-gray-700 ">{task.name}</span>
                     {task.assignedTo && (
-                      <span className="text-sm text-violet-500">
-                        Assigned to: {task.assignedTo.firstName}{" "}
-                        {task.assignedTo.lastName}
+                      <span className="text-sm border border-violet-500 bg-violet-100 px-2 ml-2 text-violet-500 rounded">
+                        {task.assignedTo.firstName} {task.assignedTo.lastName}
                       </span>
                     )}
                   </div>
@@ -131,7 +114,7 @@ const TaskCard = async ({
       <Card className="flex justify-between items-center sticky z-10 left-0 top-0 w-full">
         <div>
           <span className="text-3xl text-gray-600">
-            {title || `${NUMBERS} upcoming task${NUMBERS === 1 ? "" : "s"}`}
+            {title || `upcoming tasks`}
           </span>
         </div>
         <div>

@@ -1,29 +1,10 @@
-import { db } from "@/lib/db";
 import NewTeam from "@/app/features/team/components/NewTeam";
 import TeamCard from "@/app/features/team/components/TeamCard";
 import GlassPane from "@/components/GlassPane";
-
-export const getData = async () => {
-  const teams = await db.team.findMany({
-    include: {
-      projects: {
-        include: {
-          tasks: true,
-        },
-      },
-      members: {
-        include: {
-          user: true,
-        },
-      },
-    },
-  });
-
-  return { teams };
-};
+import { getTeams } from "@/app/features/team/actions/getTeams";
 
 export default async function page() {
-  const { teams } = await getData();
+  const { teams } = await getTeams();
 
   return (
     <div className="h-full overflow-y-auto pr-3 md:pr-3 w-full">

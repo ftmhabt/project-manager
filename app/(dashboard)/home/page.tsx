@@ -3,34 +3,13 @@ import GreetingsSkeleton from "@/components/home/GreetingsSkeleton";
 import NewProject from "@/components/project/NewProject";
 import ProjectCard from "@/components/project/ProjectCard";
 import TaskCard from "@/app/features/tasks/components/TaskCard";
-import { getUserFromCookie } from "@/lib/auth";
-import { db } from "@/lib/db";
 import Link from "next/link";
 import { Suspense } from "react";
 import GlassPane from "@/components/GlassPane";
+import { getAllProjects } from "@/app/features/tasks/actions/getAllProjects";
 
-export const getData = async () => {
-  const user = await getUserFromCookie();
-
-  if (!user) return { projects: [] };
-
-  const projects = await db.project.findMany({
-    where: {
-      OR: [
-        { ownerId: user.id },
-        { team: { members: { some: { userId: user.id } } } },
-      ],
-    },
-    include: {
-      tasks: true,
-      team: true,
-    },
-  });
-
-  return { projects };
-};
 export default async function Page() {
-  const { projects } = await getData();
+  const projects = await getAllProjects();
   return (
     <div className="h-full overflow-y-auto pr-3 md:pr-3 w-full">
       <div className="h-full items-stretch justify-center min-h-[content]">
@@ -55,7 +34,7 @@ export default async function Page() {
         </div>
         <div className="mt-6 flex-2 grow w-full flex">
           <div className="w-full">
-            <TaskCard />
+            <TaskCard numbers={10} />
           </div>
         </div>
       </div>
