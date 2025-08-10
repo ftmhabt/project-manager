@@ -69,7 +69,13 @@ const TaskCard = async ({
                   <div>
                     <span className="text-2xl text-gray-700 ">{task.name}</span>
                     {task.assignedTo && (
-                      <span className="text-sm border border-violet-500 bg-violet-100 px-2 ml-2 text-violet-500 rounded">
+                      <span
+                        className={`text-sm border  bg-violet-100 px-2 ml-2  rounded ${
+                          !canEdit
+                            ? "opacity-70 pointer-events-none text-gray-500 border-gray-500"
+                            : "text-violet-500 border-violet-500"
+                        }`}
+                      >
                         {task.assignedTo.firstName} {task.assignedTo.lastName}
                       </span>
                     )}
@@ -86,7 +92,7 @@ const TaskCard = async ({
 
                 <GlassPane
                   className={`rounded-3xl flex md:gap-3 justify-end flex-wrap md:flex-nowrap sm:mb-0 mb-2 ${
-                    !canEdit ? "opacity-50 pointer-events-none" : ""
+                    !canEdit ? "opacity-70 pointer-events-none" : ""
                   }`}
                 >
                   {task.status !== TASK_STATUS.COMPLETED && (
