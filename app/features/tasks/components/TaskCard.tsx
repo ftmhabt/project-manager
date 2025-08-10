@@ -29,7 +29,8 @@ const TaskCard = async ({
   teamMembers?: TeamMember[];
   teamOwnerId?: string;
 }) => {
-  const data = tasks || (await getPriortyTasks(numbers || 10));
+  const data =
+    tasks && tasks.length > 0 ? tasks : await getPriortyTasks(numbers || 10);
 
   const notStartedTasks = data.filter(
     (task) => task.status === TASK_STATUS.NOT_STARTED
@@ -56,7 +57,7 @@ const TaskCard = async ({
           tasks.map((task) => {
             const canEdit =
               currentUserId?.id === task.ownerId ||
-              currentUserId?.id === task.assignedTo?.id ||
+              currentUserId?.id === task.assignedToId ||
               currentUserId?.id === teamOwnerId;
 
             return (
