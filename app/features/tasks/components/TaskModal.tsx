@@ -7,7 +7,7 @@ import Button from "../../../../components/Button";
 import Input from "../../../../components/Input";
 import { getAllProjects } from "@/app/features/tasks/actions/getAllProjects";
 import ModalWrapper from "../../../../components/ModalWrapper";
-import { TeamMember, Task } from "@/app/generated/prisma";
+import { Task } from "@/app/generated/prisma";
 import { saveTask } from "@/app/features/tasks/actions/saveTask";
 import ActionButton from "../../../../components/ActionButton";
 
@@ -17,7 +17,13 @@ interface TaskModalProps {
   task?: Task; // if present → edit mode
   projectId?: string;
   selectedDay?: Date;
-  teamMembers?: TeamMember[];
+  teamMembers?: {
+    user: {
+      id: string;
+      firstName: string;
+      lastName: string;
+    };
+  }[];
   triggerLabel?: string; // optional custom button text
   triggerClassName?: string; // optional button styles
 }
@@ -152,8 +158,8 @@ export default function TaskModal({
               >
                 <option value="">Assign to member</option>
                 {teamMembers.map((m) => (
-                  <option key={m.userId} value={m.userId}>
-                    {m.userId}
+                  <option key={m.user.id} value={m.user.id}>
+                    {m.user.firstName} {m.user.lastName}
                   </option>
                 ))}
               </select>

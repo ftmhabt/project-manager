@@ -1,7 +1,6 @@
 import { getUserFromCookie } from "@/lib/auth";
-import { db } from "@/lib/db";
 import Card from "@/components/Card";
-import { Task, User, TASK_STATUS, TeamMember } from "@/app/generated/prisma";
+import { Task, User, TASK_STATUS } from "@/app/generated/prisma";
 import IsStarted from "./IsStarted";
 import IsChecked from "./IsChecked";
 import DeleteButton from "./DeleteButton";
@@ -26,7 +25,13 @@ const TaskCard = async ({
   title?: string;
   tasks?: TaskWithOptionalAssigned[];
   projectId?: string;
-  teamMembers?: TeamMember[];
+  teamMembers?: {
+    user: {
+      id: string;
+      firstName: string;
+      lastName: string;
+    };
+  }[];
   teamOwnerId?: string;
 }) => {
   const data =
