@@ -1,6 +1,6 @@
-import { useMemo } from "react";
+import { TasksWithProject } from "@/features/tasks/actions/getUserTasks";
 import { isBetween } from "@/lib/dateHelpers";
-import { TasksWithProject } from "@/app/features/tasks/actions/getUserTasks";
+import { useMemo } from "react";
 
 export function useActiveItems(tasks: TasksWithProject, selectedDay?: Date) {
   return useMemo(() => {
