@@ -1,5 +1,5 @@
-import AuthForm from "@/app/features/user/components/AuthForm";
-import Credentials from "@/app/features/user/components/Credentials";
+import AuthForm from "features/user/components/AuthForm";
+import Credentials from "features/user/components/Credentials";
 
 export default function Signin() {
   return (
