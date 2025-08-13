@@ -1,5 +1,5 @@
-import { getProjectById } from "@/app/features/tasks/actions/getAllProjects";
-import TaskCard from "@/app/features/tasks/components/TaskCard";
+import { getProjectById } from "features/tasks/actions/getAllProjects";
+import TaskCard from "features/tasks/components/TaskCard";
 
 export default async function ProjectPage({
   params,

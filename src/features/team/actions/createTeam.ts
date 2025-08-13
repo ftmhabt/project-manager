@@ -1,8 +1,9 @@
 "use server";
-import { getUserFromCookie } from "@/lib/auth";
-import { db } from "@/lib/db";
+
 import { revalidatePath } from "next/cache";
 import { nanoid } from "nanoid";
+import { getUserFromCookie } from "lib/auth";
+import { db } from "lib/db";
 
 export async function createTeam(name: string) {
   const user = await getUserFromCookie();

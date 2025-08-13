@@ -1,7 +1,7 @@
-import NewTeam from "@/app/features/team/components/NewTeam";
-import TeamCard from "@/app/features/team/components/TeamCard";
-import GlassPane from "@/components/GlassPane";
-import { getTeams } from "@/app/features/team/actions/getTeams";
+import GlassPane from "components/GlassPane";
+import { getTeams } from "features/team/actions/getTeams";
+import NewTeam from "features/team/components/NewTeam";
+import TeamCard from "features/team/components/TeamCard";
 
 export default async function page() {
   const { teams } = await getTeams();

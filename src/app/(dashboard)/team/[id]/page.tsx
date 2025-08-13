@@ -1,5 +1,5 @@
-import TeamDashboard from "@/app/features/team/components/TeamDashboard";
-import { db } from "@/lib/db";
+import TeamDashboard from "features/team/components/TeamDashboard";
+import { db } from "lib/db";
 
 export default async function TeamPage({ params }: { params: { id: string } }) {
   const p = await params;

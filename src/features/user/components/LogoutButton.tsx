@@ -1,5 +1,5 @@
-import { logout } from "@/app/features/user/actions/logout";
-import Button from "@/components/Button";
+import Button from "components/Button";
+import { logout } from "../actions/logout";
 
 export default function LogoutButton() {
   return (

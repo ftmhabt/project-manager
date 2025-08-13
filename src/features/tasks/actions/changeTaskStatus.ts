@@ -1,7 +1,7 @@
 "use server";
 
-import { TASK_STATUS } from "@/app/generated/prisma";
-import { db } from "@/lib/db";
+import { TASK_STATUS } from "@prisma/client";
+import { db } from "lib/db";
 import { revalidatePath } from "next/cache";
 
 export async function updateTaskStatus({

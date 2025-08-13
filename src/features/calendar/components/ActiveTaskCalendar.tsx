@@ -4,19 +4,19 @@ import { useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { format } from "date-fns";
-import { useOccupiedDates } from "@/hooks/useOccupiedDates";
-import { useActiveItems } from "@/hooks/useActiveItems";
-import { useVisibleItems } from "@/hooks/useVisibleItems";
-import Card from "../../../../components/Card";
 import TaskList from "./TaskList";
-import styles from "@/styles/ActiveItemCalendar.module.scss";
+import styles from "styles/ActiveTaskCalendar.module.scss";
 import Agenda from "./Agenda";
-import { TasksWithProject } from "@/app/features/tasks/actions/getUserTasks";
-import Button from "../../../../components/Button";
 import TaskModal from "../../tasks/components/TaskModal";
 import ToggleCompletedButton from "./ToggleCompletedButton";
+import { useActiveItems } from "../hooks/useActiveItems";
+import { useOccupiedDates } from "../hooks/useOccupiedDates";
+import { useVisibleItems } from "../hooks/useVisibleItems";
+import Card from "components/Card";
+import { TasksWithProject } from "features/tasks/actions/getUserTasks";
+import Button from "components/Button";
 
-export default function ActiveItemCalendar({
+export default function ActiveTaskCalendar({
   tasks,
 }: {
   tasks: TasksWithProject;

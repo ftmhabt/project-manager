@@ -2,8 +2,8 @@
 import { FormEvent, useState, useTransition } from "react";
 import Button from "../Button";
 import Input from "../Input";
-import { createNewProject } from "@/app/features/tasks/actions/createNewProject";
 import ModalWrapper from "../ModalWrapper";
+import { createNewProject } from "@/features/tasks/actions/createNewProject";
 
 const NewProject = ({ teamId }: { teamId?: string }) => {
   const [name, setName] = useState("");

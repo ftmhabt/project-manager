@@ -1,13 +1,13 @@
-import { getUserFromCookie } from "@/lib/auth";
-import Card from "@/components/Card";
-import { Task, User, TASK_STATUS } from "@/app/generated/prisma";
 import IsStarted from "./IsStarted";
 import IsChecked from "./IsChecked";
 import DeleteButton from "./DeleteButton";
-import GlassPane from "@/components/GlassPane";
-import { timeLeftUntil } from "@/lib/due";
 import TaskModal from "./TaskModal";
 import { getPriortyTasks } from "../actions/getAllProjects";
+import { Task, TASK_STATUS, User } from "@prisma/client";
+import { getUserFromCookie } from "lib/auth";
+import GlassPane from "components/GlassPane";
+import Card from "components/Card";
+import { timeLeftUntil } from "lib/dateHelpers";
 
 export type TaskWithOptionalAssigned = Task & {
   assignedTo?: Pick<User, "id" | "firstName" | "lastName"> | null;
@@ -34,8 +34,7 @@ const TaskCard = async ({
   }[];
   teamOwnerId?: string;
 }) => {
-  const data =
-    tasks && tasks.length > 0 ? tasks : await getPriortyTasks(numbers || 10);
+  const data = tasks || (await getPriortyTasks(numbers || 10));
 
   const notStartedTasks = data.filter(
     (task) => task.status === TASK_STATUS.NOT_STARTED
@@ -68,7 +67,7 @@ const TaskCard = async ({
             return (
               <div
                 key={task.id}
-                className="flex md:flex-row flex-col gap-2 w-full"
+                className={`flex md:flex-row flex-col gap-2 w-full`}
               >
                 <div className="py-2 w-full">
                   <div>

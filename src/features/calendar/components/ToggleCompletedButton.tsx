@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import ActionButton from "../../../../components/ActionButton";
-import GlassPane from "../../../../components/GlassPane";
+import ActionButton from "components/ActionButton";
+import GlassPane from "components/GlassPane";
 
 interface Props {
   className?: string;

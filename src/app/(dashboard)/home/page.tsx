@@ -1,12 +1,12 @@
-import Greeting from "@/components/home/Greeting";
-import GreetingsSkeleton from "@/components/home/GreetingsSkeleton";
-import NewProject from "@/components/project/NewProject";
-import ProjectCard from "@/components/project/ProjectCard";
-import TaskCard from "@/app/features/tasks/components/TaskCard";
+import GlassPane from "components/GlassPane";
+import Greeting from "components/home/Greeting";
+import GreetingsSkeleton from "components/home/GreetingsSkeleton";
+import NewProject from "components/project/NewProject";
+import ProjectCard from "components/project/ProjectCard";
+import { getAllProjects } from "features/tasks/actions/getAllProjects";
+import TaskCard from "features/tasks/components/TaskCard";
 import Link from "next/link";
 import { Suspense } from "react";
-import GlassPane from "@/components/GlassPane";
-import { getAllProjects } from "@/app/features/tasks/actions/getAllProjects";
 
 export default async function Page() {
   const projects = await getAllProjects();

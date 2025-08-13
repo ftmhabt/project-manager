@@ -1,11 +1,11 @@
 "use client";
 
 import { isSameDay, isSameWeek } from "date-fns";
-import GlassPane from "../../../../components/GlassPane";
-import Card from "../../../../components/Card";
+import GlassPane from "components/GlassPane";
+import Card from "components/Card";
 import Link from "next/link";
-import { TasksWithProject } from "@/app/features/tasks/actions/getUserTasks";
 import { Calendar, Coffee } from "react-feather";
+import { TasksWithProject } from "features/tasks/actions/getUserTasks";
 
 type AgendaTask = {
   id: string;

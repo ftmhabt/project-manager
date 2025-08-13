@@ -3,18 +3,18 @@ import { useEffect, useState, useTransition, FormEvent } from "react";
 import Modal from "react-modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Button from "../../../../components/Button";
-import Input from "../../../../components/Input";
-import { getAllProjects } from "@/app/features/tasks/actions/getAllProjects";
-import ModalWrapper from "../../../../components/ModalWrapper";
-import { Task } from "@/app/generated/prisma";
-import { saveTask } from "@/app/features/tasks/actions/saveTask";
-import ActionButton from "../../../../components/ActionButton";
+import { Task } from "@prisma/client";
+import { getAllProjects } from "../actions/getAllProjects";
+import { saveTask } from "../actions/saveTask";
+import ModalWrapper from "components/ModalWrapper";
+import ActionButton from "components/ActionButton";
+import Input from "components/Input";
+import Button from "components/Button";
 
 Modal.setAppElement("#modal");
 
 interface TaskModalProps {
-  task?: Task; // if present → edit mode
+  task?: Task; // if present → edit
   projectId?: string;
   selectedDay?: Date;
   teamMembers?: {

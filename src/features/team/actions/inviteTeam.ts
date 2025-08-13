@@ -1,6 +1,7 @@
 "use server";
-import { getUserFromCookie } from "@/lib/auth";
-import { db } from "@/lib/db";
+
+import { getUserFromCookie } from "lib/auth";
+import { db } from "lib/db";
 import { redirect } from "next/dist/client/components/navigation";
 
 export async function getTeamByInviteCodeAction(inviteCode: string) {

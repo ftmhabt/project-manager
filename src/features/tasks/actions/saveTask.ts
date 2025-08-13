@@ -1,7 +1,7 @@
 "use server";
 
-import { getUserFromCookie } from "@/lib/auth";
-import { db } from "@/lib/db";
+import { getUserFromCookie } from "lib/auth";
+import { db } from "lib/db";
 import { revalidatePath } from "next/cache";
 
 interface TaskData {

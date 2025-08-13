@@ -1,9 +1,9 @@
 "use client";
 
 import { useTransition } from "react";
-import { Task } from "@/app/generated/prisma";
-import { deleteTask } from "@/app/features/tasks/actions/deleteTask";
-import ActionButton from "../../../../components/ActionButton";
+import { deleteTask } from "../actions/deleteTask";
+import ActionButton from "components/ActionButton";
+import { Task } from "@prisma/client";
 
 export default function DeleteButton({ task }: { task: Task }) {
   const [isPending, startTransition] = useTransition();

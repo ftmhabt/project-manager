@@ -1,12 +1,12 @@
 "use client";
 
-import { register, signin } from "@/lib/api";
+import Button from "components/Button";
+import Card from "components/Card";
+import Input from "components/Input";
+import { register, signin } from "lib/api";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
-import Link from "next/link";
-import Card from "@/components/Card";
-import Input from "@/components/Input";
-import Button from "@/components/Button";
 
 const registerContent = {
   linkUrl: "/signin",

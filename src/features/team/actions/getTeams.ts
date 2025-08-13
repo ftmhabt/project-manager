@@ -1,5 +1,5 @@
-import { getUserFromCookie } from "@/lib/auth";
-import { db } from "@/lib/db";
+import { getUserFromCookie } from "lib/auth";
+import { db } from "lib/db";
 
 export const getTeams = async () => {
   const user = await getUserFromCookie();

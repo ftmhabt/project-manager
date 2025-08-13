@@ -1,5 +1,5 @@
-import "@/styles/globals.css";
 import type { Metadata } from "next";
+import "styles/globals.css";
 
 export const metadata: Metadata = {
   title: "Project Manager App",

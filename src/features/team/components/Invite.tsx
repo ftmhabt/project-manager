@@ -1,8 +1,8 @@
 "use client";
 
+import Button from "components/Button";
 import { useState } from "react";
-import { joinTeamAction } from "@/app/features/team/actions/inviteTeam";
-import Button from "@/components/Button";
+import { joinTeamAction } from "../actions/inviteTeam";
 
 export default function Invite({ inviteCode }: { inviteCode: string }) {
   const [error, setError] = useState("");

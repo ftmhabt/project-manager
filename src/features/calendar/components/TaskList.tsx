@@ -1,8 +1,8 @@
-import { Task, TASK_STATUS } from "@/app/generated/prisma";
-import GlassPane from "../../../../components/GlassPane";
 import { format } from "date-fns";
 import Link from "next/link";
 import { TasksWithProject } from "../../tasks/actions/getUserTasks";
+import GlassPane from "components/GlassPane";
+import { TASK_STATUS } from "@prisma/client";
 
 export default function TaskList({
   tasks,

@@ -1,20 +1,18 @@
 "use client";
 
-import React, { useState, useTransition } from "react";
-import { Task, TASK_STATUS } from "@/app/generated/prisma";
-import { updateTaskStatus } from "@/app/features/tasks/actions/changeTaskStatus";
-import ActionButton from "../../../../components/ActionButton";
+import { useState, useTransition } from "react";
+import { updateTaskStatus } from "../actions/changeTaskStatus";
+import ActionButton from "components/ActionButton";
+import { Task } from "@prisma/client";
 
 export default function IsStarted({ task }: { task: Task }) {
-  const [isStarted, setIsStarted] = useState(
-    task.status === TASK_STATUS.STARTED
-  );
+  const [isStarted, setIsStarted] = useState(task.status === "STARTED");
   const [isPending, startTransition] = useTransition();
 
   const handleToggle = () => {
-    const newStatus = isStarted ? TASK_STATUS.NOT_STARTED : TASK_STATUS.STARTED;
+    const newStatus = isStarted ? "NOT_STARTED" : "STARTED";
 
-    setIsStarted(newStatus === TASK_STATUS.STARTED);
+    setIsStarted(newStatus === "STARTED");
 
     startTransition(async () => {
       try {

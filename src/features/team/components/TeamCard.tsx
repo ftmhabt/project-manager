@@ -1,6 +1,7 @@
 "use client";
-import { Project, Task, Team, TeamMember, User } from "@/app/generated/prisma";
-import Card from "@/components/Card";
+
+import { Project, Task, Team, TeamMember, User } from "@prisma/client";
+import Card from "components/Card";
 import Link from "next/link";
 import { useState } from "react";
 

@@ -1,4 +1,4 @@
-import { Project, Task } from "@/app/generated/prisma";
+import { Project, Task } from "@prisma/client";
 import { format } from "date-fns";
 
 export type ActivityType =

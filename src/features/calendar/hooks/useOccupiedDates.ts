@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import { Task, TASK_STATUS } from "@/app/generated/prisma";
 import { eachDayOfInterval, startOfDay } from "date-fns";
+import { Task, TASK_STATUS } from "@prisma/client";
 
 export function useOccupiedDates(tasks: Task[], showCompleted: boolean) {
   return useMemo(() => {

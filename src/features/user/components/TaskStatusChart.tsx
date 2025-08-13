@@ -1,14 +1,14 @@
 "use client";
 
+import Card from "components/Card";
 import {
-  PieChart,
-  Pie,
   Cell,
   Legend,
-  ResponsiveContainer,
   LegendProps,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
 } from "recharts";
-import Card from "@/components/Card";
 
 const COLORS = [
   "hsla(337, 92%, 61%, 1)",

@@ -1,5 +1,4 @@
-import Card from "@/components/Card";
-import React from "react";
+import Card from "components/Card";
 
 const HomePageLoader = () => {
   return (

@@ -1,6 +1,6 @@
-import GlassPane from "@/components/GlassPane";
-import { ReactNode } from "react";
 import "@/styles/globals.css";
+import GlassPane from "components/GlassPane";
+import { ReactNode } from "react";
 export default function DashboardRootLayout({
   children,
 }: {

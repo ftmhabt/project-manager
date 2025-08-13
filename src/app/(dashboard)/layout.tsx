@@ -1,7 +1,8 @@
-import GlassPane from "@/components/GlassPane";
-import { ReactNode } from "react";
 import "@/styles/globals.css";
-import Sidebar from "@/components/home/Sidebar";
+import GlassPane from "components/GlassPane";
+import Sidebar from "components/home/Sidebar";
+import { ReactNode } from "react";
+
 export default function DashboardRootLayout({
   children,
 }: {

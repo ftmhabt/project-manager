@@ -1,22 +1,18 @@
 "use client";
 
-import React, { useState, useTransition } from "react";
-import { Task, TASK_STATUS } from "@/app/generated/prisma";
-import { updateTaskStatus } from "@/app/features/tasks/actions/changeTaskStatus";
-import ActionButton from "../../../../components/ActionButton";
+import { Task } from "@prisma/client";
+import { useState, useTransition } from "react";
+import { updateTaskStatus } from "../actions/changeTaskStatus";
+import ActionButton from "components/ActionButton";
 
 export default function IsChecked({ task }: { task: Task }) {
-  const [isChecked, setIsChecked] = useState(
-    task.status === TASK_STATUS.COMPLETED
-  );
+  const [isChecked, setIsChecked] = useState(task.status === "COMPLETED");
   const [isPending, startTransition] = useTransition();
 
   const handleToggle = () => {
-    const newStatus = isChecked
-      ? TASK_STATUS.NOT_STARTED
-      : TASK_STATUS.COMPLETED;
+    const newStatus = isChecked ? "NOT_STARTED" : "COMPLETED";
 
-    setIsChecked(newStatus === TASK_STATUS.COMPLETED);
+    setIsChecked(newStatus === "COMPLETED");
 
     startTransition(async () => {
       try {

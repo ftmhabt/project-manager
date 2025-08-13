@@ -1,6 +1,6 @@
 "use server";
-import { getUserFromCookie } from "@/lib/auth";
-import { db } from "@/lib/db";
+import { getUserFromCookie } from "lib/auth";
+import { db } from "lib/db";
 import { revalidatePath } from "next/cache";
 
 export async function createNewProject(name: string, teamId?: string) {

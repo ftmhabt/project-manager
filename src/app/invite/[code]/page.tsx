@@ -1,6 +1,6 @@
-import { getTeamByInviteCodeAction } from "@/app/features/team/actions/inviteTeam";
-import Invite from "@/app/features/team/components/Invite";
-import Card from "@/components/Card";
+import Card from "components/Card";
+import { getTeamByInviteCodeAction } from "features/team/actions/inviteTeam";
+import Invite from "features/team/components/Invite";
 
 export default async function InvitePage({
   params,

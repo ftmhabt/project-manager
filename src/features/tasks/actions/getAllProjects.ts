@@ -1,8 +1,8 @@
 "use server";
 
-import { TASK_STATUS } from "@/app/generated/prisma";
-import { getUserFromCookie } from "@/lib/auth";
-import { db } from "@/lib/db";
+import { TASK_STATUS } from "@prisma/client";
+import { getUserFromCookie } from "lib/auth";
+import { db } from "lib/db";
 
 export const getAllProjects = async () => {
   const user = await getUserFromCookie();

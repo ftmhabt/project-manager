@@ -1,16 +1,12 @@
-import React from "react";
-import { getUserFromCookie } from "@/lib/auth";
-import { getFullUserWithProjectsAndTasks } from "@/lib/user";
-import Card from "@/components/Card";
-import GlassPane from "@/components/GlassPane";
-import LogoutButton from "@/app/features/user/components/LogoutButton";
-import TaskStatusChart from "@/app/features/user/components/TaskStatusChart";
+import Card from "components/Card";
+import GlassPane from "components/GlassPane";
+import LogoutButton from "features/user/components/LogoutButton";
+import StatCard from "features/user/components/StatCard";
+import TaskStatusChart from "features/user/components/TaskStatusChart";
+import { buildActivityList, formatDate } from "features/user/utils/activity";
+import { getUserFromCookie } from "lib/auth";
+import { getFullUserWithProjectsAndTasks } from "lib/user";
 import { Edit, FolderPlus, PlusSquare } from "react-feather";
-import {
-  buildActivityList,
-  formatDate,
-} from "@/app/features/user/utils/activity";
-import StatCard from "@/app/features/user/components/StatCard";
 
 export default async function DashboardPage() {
   try {
@@ -70,21 +66,25 @@ export default async function DashboardPage() {
                 <li key={`${item.type}-${item.id}`} className="font-medium">
                   {item.type === "project-created" && (
                     <ActivityItem
-                      icon={<FolderPlus color="#8b5cf6" size={15} />}
+                      icon={
+                        <FolderPlus color="#8b5cf6" size={15} opacity={0.8} />
+                      }
                       label="Project created"
                       {...item}
                     />
                   )}
                   {item.type === "task-created" && (
                     <ActivityItem
-                      icon={<PlusSquare color="#8b5cf6" size={15} />}
+                      icon={
+                        <PlusSquare color="#8b5cf6" size={15} opacity={0.8} />
+                      }
                       label="Task created"
                       {...item}
                     />
                   )}
                   {item.type === "task-updated" && (
                     <ActivityItem
-                      icon={<Edit color="#8b5cf6" size={15} />}
+                      icon={<Edit color="#8b5cf6" size={15} opacity={0.8} />}
                       label={`Status changed to ${item.status}`}
                       {...item}
                     />
@@ -116,7 +116,7 @@ function ActivityItem({
   date: Date;
 }) {
   return (
-    <div>
+    <div className="flex items-center space-x-2">
       {icon} <strong>{name}</strong> — <em>{label}</em> on {formatDate(date)}
     </div>
   );
