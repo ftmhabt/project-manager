@@ -4,9 +4,10 @@ import Card from "components/Card";
 import {
   Cell,
   Legend,
-  LegendProps,
+  LegendPayload,
   Pie,
   PieChart,
+  PieLabelRenderProps,
   ResponsiveContainer,
 } from "recharts";
 
@@ -16,13 +17,18 @@ const COLORS = [
   "hsla(271, 78%, 63%, 1)",
 ];
 
-const CustomLegend = (props: LegendProps) => {
-  const { payload } = props;
+type CustomLegendProps = {
+  payload?: LegendPayload[];
+};
 
+const CustomLegend = ({ payload = [] }: CustomLegendProps) => {
   return (
     <ul className="text-xs mt-2 flex sm:flex-col justify-evenly w-full">
-      {payload?.map((entry, index) => (
-        <li key={`item-${index}`} className="flex items-center gap-1 sm:gap-2">
+      {payload.map((entry, index) => (
+        <li
+          key={`legend-item-${index}`}
+          className="flex items-center gap-1 sm:gap-2"
+        >
           <span
             className="inline-block w-3 h-3 rounded-full"
             style={{ backgroundColor: entry.color }}
@@ -41,10 +47,14 @@ const renderCustomLabel = ({
   innerRadius,
   outerRadius,
   value,
-}: any) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-midAngle * (Math.PI / 180));
-  const y = cy + radius * Math.sin(-midAngle * (Math.PI / 180));
+}: PieLabelRenderProps) => {
+  const radius =
+    (innerRadius as number) +
+    ((outerRadius as number) - (innerRadius as number)) * 0.5;
+  const x =
+    (cx as number) + radius * Math.cos(-((midAngle as number) * Math.PI) / 180);
+  const y =
+    (cy as number) + radius * Math.sin(-((midAngle as number) * Math.PI) / 180);
 
   return (
     <text

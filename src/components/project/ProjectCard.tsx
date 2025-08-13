@@ -1,7 +1,7 @@
-import { FC } from "react";
-import Card from "../Card";
+import { Project, Task, Team } from "@prisma/client";
 import clsx from "clsx";
-import { Project, Task, Team } from "@/app/generated/prisma";
+import Card from "components/Card";
+import { FC } from "react";
 
 type ProjectWithTasksAndTeam = Project & {
   tasks: Task[];

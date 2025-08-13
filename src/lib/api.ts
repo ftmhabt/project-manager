@@ -1,7 +1,7 @@
 type FetcherParams = {
   url: string;
   method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
-  body?: Record<string, any>;
+  body?: User;
   json?: boolean;
 };
 
@@ -29,10 +29,17 @@ export const fetcher = async ({
   }
 };
 
-export const register = (user) => {
-  return fetcher({ url: "/api/register", method: "POST", body: user });
+type User = {
+  email: string;
+  password: string;
+  firstName?: string;
+  lastName?: string;
 };
 
-export const signin = (user) => {
-  return fetcher({ url: "/api/signin", method: "POST", body: user });
+export const register = (user: User) => {
+  return fetcher({ url: "/api/auth/register", method: "POST", body: user });
+};
+
+export const signin = (user: User) => {
+  return fetcher({ url: "/api/auth/signin", method: "POST", body: user });
 };
